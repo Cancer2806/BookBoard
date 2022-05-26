@@ -1,2 +1,2 @@
 # BookBoard
-To be renamed later
+A fabulous place for sharing (and selling) original content
