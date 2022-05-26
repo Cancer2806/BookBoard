@@ -23,14 +23,7 @@ Categories.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    file_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'files',
-        key: 'id',
-      },
-    },
+  },{
   sequelize,
   timestamps: true,
   freezeTableName: true,

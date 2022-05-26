@@ -1,0 +1,17 @@
+[
+  {
+    "review_content": "This was great, I loved it",
+    "rating": 5
+  },
+  {
+    "review_content": "This could use some work, but has sound ideas within it",
+    "rating": 4
+  },
+  { "review_content": "Fabulous work, but please use a spell-checker next time :)",
+    "rating": 3
+  },
+  {
+    "review_content": "I really had trouble finishing this - I think it could use a lot less padding",
+    "rating": 2
+  }
+]

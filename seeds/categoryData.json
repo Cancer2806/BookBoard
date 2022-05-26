@@ -1,0 +1,18 @@
+[
+  {
+    "category_name": "Science Fiction",
+    "category_description": "themes around future technology and civilisations"
+  },
+  {
+    "category_name": "Mystery",
+    "category_description": "solving of mysteries, often crime related"
+  },
+  {
+    "category_name": "Fantasy",
+    "category_description": "themes around alternate realities, often involving magic"
+  },
+  {
+  "category_name": "Technology",
+  "category_description": "concerning how technology affects civilisation and evolutionary progress"
+  }
+]
