@@ -1,2 +1,2 @@
-# Project2
+# BookBoard
 To be renamed later
