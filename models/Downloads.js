@@ -15,7 +15,7 @@ Downloads.init(
       autoIncrement: true,
     },
     value: {
-      type: DataTypes.DECIMAL(4,2),
+      type: DataTypes.DECIMAL(4, 2),
       allowNull: true,
     },
     user_id: {
@@ -34,6 +34,8 @@ Downloads.init(
         key: 'id',
       },
     },
+  },
+  {
     sequelize,
     timestamps: true,
     freezeTableName: true,

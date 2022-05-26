@@ -3,7 +3,7 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
 // create Files Model (table) using Sequelize
-class Files extends Model { }
+class Files extends Model {}
 
 // Define fields
 Files.init(
@@ -18,8 +18,12 @@ Files.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    brief_description: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     price: {
-      type: DataTypes.DECIMAL(4,2),
+      type: DataTypes.DECIMAL(4, 2),
       allowNull: true,
     },
     // holds details of where to find file
@@ -30,7 +34,7 @@ Files.init(
     // holds the cover art image
     cover_art: {
       type: DataTypes.BLOB,
-      allowNull: false,
+      allowNull: true,
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -54,12 +58,15 @@ Files.init(
         model: 'categories',
         key: 'id',
       },
+
     },
-    sequelize,
-    timestamps: true,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'files',
+  },
+  {
+  sequelize,
+  timestamps: true,
+  freezeTableName: true,
+  underscored: true,
+  modelName: 'files',
   }
 );
 

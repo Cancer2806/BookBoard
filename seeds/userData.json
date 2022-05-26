@@ -1,0 +1,32 @@
+[
+  {
+    "first_name": "Sally",
+    "last_name": "Monroe",
+    "email":  "sally.monroe@books.com",
+    "password":  "password12345"
+  },
+  {
+    "first_name": "Robert",
+    "last_name": "The Bruce",
+    "email": "scotty@books.com",
+    "password": "password12345"
+  },
+  {
+    "first_name": "Mickey",
+    "last_name": "Cats",
+    "email": "mickey@zine.com",
+    "password": "password12345"
+  },
+  {
+    "first_name": "Cloudy",
+    "last_name": "Day",
+    "email": "rains@zine.com",
+    "password": "password12345"
+  },
+  {
+    "first_name": "Comic",
+    "last_name": "Reader",
+    "email": "comical@zine.com",
+    "password": "password12345"
+  }
+]
