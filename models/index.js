@@ -80,8 +80,7 @@ Reviews.belongsTo(Files, {
   onDelete: "NOACTION",
 });
 
-// Below still to be defined properly as many to many through intermediate file
-Files.hasMany(Types, {
+Files.hasOne(Types, {
   foreignKey: "type_id",
   onDelete: "NOACTION",
 });
@@ -91,14 +90,9 @@ Types.hasMany(Files, {
   onDelete: "NOACTION",
 });
 
-Files.hasMany(Categories, {
-  foreignKey: "category_id",
-  onDelete: "NOACTION",
-});
+// Many to many relationships
+Files.belongsToMany(Categories, { through: 'file_cat' });
 
-Categories.hasMany(Files, {
-  foreignKey: "category_id",
-  onDelete: "NOACTION",
-});
+Categories.belongsToMany(Files, { through: 'file_cat' });
 
-// Still to determine which way deletes should go in terms of cascade
+// Still to determine which way deletes should go in terms of cascade, etc.
