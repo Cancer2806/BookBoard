@@ -1,0 +1,282 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* --light-accent: black; */
+  --light-accent: #e5e5e5;
+  --light-bg: #f8f8f8;
+  --dark-accent: #28282b;
+}
+
+p {
+  color: #3c3c43
+}
+
+body {
+  font-family: -apple-system, "Helvetica", sans-serif;
+  font-size: 13px;
+}
+
+header {
+  height: 64px;
+  /* background: lightgrey; */
+  width: 100%;
+  padding: 0 100px 0 100px;
+  border-bottom: 1px solid var(--light-accent);
+  position: fixed;
+  background: white;
+  top: 0;
+  z-index: 3;
+}
+
+.header-wrapper {
+  width: 100%;
+  /* background: lightblue; */
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-wrapper div {
+  height: 100%;
+}
+
+.logo-sec {
+  width: 15%;
+  /* background-color: rgb(134, 201, 201); */
+}
+
+.search-sec {
+  width: 40%;
+  /* background-color: rgb(134, 201, 137); */
+}
+
+.nav-sec {
+  width: 45%;
+  /* background-color: rgb(201, 134, 143); */
+  display: flex;
+  align-items: center;
+  justify-content:flex-end;
+}
+
+.nav-item {
+  padding: 0 25px;
+  color: #3c3c43;
+  /* background: lightblue; */
+}
+
+.nav-item:hover {
+  background: var(--light-accent);
+}
+
+.profile-sec {
+  width: 20%;
+  /* background-color: rgb(201, 166, 134); */
+}
+
+.search-field {
+  width: 75%;
+  height: 30px;
+  background: none;
+  border: 1px var(--light-accent) solid;
+  padding: 0 10px;
+}
+
+.search-submit {
+  background: none;
+  border: 1px var(--light-accent) solid;
+  border-left: none;
+  height: 30px;
+  width: 25%;
+  color: #28282b;
+}
+
+.search-form {
+  width:100%;
+}
+
+main {
+  /* background: lightgrey; */
+  width: 100%;
+  padding: 0 100px 0 100px;
+}
+
+.hero {
+  margin-top: 50px;
+  height: calc(100vh - 50px);
+  /* background: #3c3c43; */
+  padding: 50px 0;
+}
+
+.hero-content {
+  /* background: #e5e5e5; */
+  width: 100%;
+  height: 100%;
+  border: 1px var(--light-accent) solid;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.popular-content {
+  /* background: #e5e5e5; */
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+}
+
+.recent-content {
+  display: flex; 
+  align-items:center;
+  overflow-x: auto;
+  position: relative;
+  /* -ms-overflow-style: none;  /* IE and Edge */
+  /* scrollbar-width: none;  Firefox */
+} 
+
+/* .recent-content::-webkit-scrollbar {
+  display: none;
+} */
+
+.content-box {
+  height: 275px;
+  width: 25%;
+  padding: 15px;
+  flex-shrink: 0;
+}
+
+.content-header {
+  width: 100%;
+  height: 40%;
+  background: var(--light-bg);
+  border-left: 1px var(--light-accent) solid;
+  border-top: 1px var(--light-accent) solid;
+  border-right: 1px var(--light-accent) solid;
+  border-radius: 5px 5px 0 0;
+}
+
+.header-title {
+  width: 65%;
+  height: 100%;
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  color: #28282b;
+  font-size: 125%;
+}
+
+h3 {
+  font-weight:normal;
+}
+
+.italic {
+  font-style: italic; 
+  font-weight: 50;
+}
+
+.header-cover {
+  width: 35%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+}
+
+.content-body {
+  border: 1px var(--light-accent) solid;
+  width: 100%;
+  height: 60%;
+  border-radius: 0 0 5px 5px;
+}
+
+.cover-thumb {
+  height: 100%;
+}
+
+.content-nav {
+  width: 100%;
+  /* border-bottom: 1px var(--light-accent) solid; */
+  height: 35px;
+  padding: 10px 10px 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content-item {
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.content-nav:hover .content-item{
+  background: var(--light-bg);
+}
+
+.read-btn {
+  background: none;
+  border-radius: 5px;
+  border: 1px var(--light-accent) solid;
+  color: #3c3c43;
+}
+
+.read-btn:hover {
+  background: var(--light-bg);
+}
+
+h2 {
+  color: #3c3c43;
+  font-size: 175%;
+  margin: 0px 0 10px 0;
+  font-weight: bold;
+  padding-left: 15px;
+}
+
+.popular-btn, .recent-btn {
+  width: 200px;
+  height: 50px;
+  background: none;
+  border:  1px var(--dark-accent) solid;
+  color: var(--dark-accent);
+  border-radius: 5px;
+}
+
+.popular-btn:hover {
+  background: var(--light-bg);
+}
+
+.hero-box {
+  width: 25%;
+  height: 50%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-img {
+  height: 90%;
+  transition: all 0.25s linear;
+  z-index: 0;
+}
+
+.hero-img:hover {
+  opacity:0.75;
+  transform: scale(1.07);
+  z-index: 0;
+}
+
+footer {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
