@@ -1,0 +1,14 @@
+[
+  {
+    "type_name": "eBook",
+    "type_description": "standard novel format"
+  },
+  {
+    "type_name": "zine",
+    "type_description": "electronic magazine format"
+  },
+  {
+    "type_name": "comic book",
+    "type_description": "graphical novel"
+  }
+]
