@@ -14,7 +14,7 @@ Downloads.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    value: {
+    price: {
       type: DataTypes.DECIMAL(4, 2),
       allowNull: true,
     },
