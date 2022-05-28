@@ -26,7 +26,7 @@ header {
   width: 100%;
   padding: 0 100px 0 100px;
   border-bottom: 1px solid var(--light-accent);
-  position: fixed;
+  /* position: fixed; */
   background: white;
   top: 0;
   z-index: 3;
@@ -69,6 +69,7 @@ header {
 .nav-item {
   padding: 0 25px;
   color: #3c3c43;
+  cursor: pointer;
   /* background: lightblue; */
 }
 

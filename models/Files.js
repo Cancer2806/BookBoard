@@ -33,7 +33,7 @@ Files.init(
     },
     // holds the cover art image
     cover_art: {
-      type: DataTypes.BLOB,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     user_id: {
