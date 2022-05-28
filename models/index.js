@@ -90,13 +90,14 @@ Files.belongsTo(Types, {
   onDelete: "NO ACTION",
 });
 
+Categories.hasMany(Files, {
+  foreignKey: "category_id",
+  onDelete: "NO ACTION",
+});
 
-
-// Many to many relationships
-Files.belongsToMany(Categories, { through: 'file_cat' });
-
-Categories.belongsToMany(Files, { through: 'file_cat' });
-
-// Still to determine which way deletes should go in terms of cascade, etc.
+Files.belongsTo(Categories, {
+  foreignKey: "category_id",
+  onDelete: "NO ACTION",
+});
 
 module.exports = { Categories, Downloads, Favourites, Files, Reviews, Types, Users };
