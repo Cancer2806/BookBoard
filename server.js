@@ -4,6 +4,8 @@ const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
+
+
 //const helpers = require('./utils/helpers');
 
 // Use sequelize for db connection and session id control
