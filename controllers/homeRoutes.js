@@ -7,6 +7,7 @@ const im  = require('imagemagick')
 var path = require('path');
 
 const { Categories, Types, Files } = require("../models");
+const { sync } = require("../models/Users");
 const path_img = 'uploads/img/';
 const path_pdf = 'uploads/doc/';
 
@@ -51,14 +52,14 @@ catch(err)
  
 }
 
-function getDocumentCategory()
+const getDocumentCategory=async ()=>
 {
   const data1=await Categories.findAll();
   const category = data1.map((data) => data.get({ plain: true }));
  return category;
 }
 
-function getDocumentType()
+const getDocumentType=async ()=>
 {
   const data2=await Types.findAll();
   const doc_type =data2.map((data) => data.get({ plain: true }));
@@ -69,8 +70,8 @@ function getDocumentType()
 router.get("/", async (req, res) => {
   try {
 
-    const doc_type=getDocumentType();
-    const category=getDocumentCategory();
+    const doc_type=await getDocumentType();
+    const category=await getDocumentCategory();
     res.render("addFiles",{category,doc_type});
   } catch (err) {
     res.status(500).json(err);
@@ -78,8 +79,8 @@ router.get("/", async (req, res) => {
 });
 router.get("/upload", async (req, res) => {
   try {
-    const doc_type=getDocumentType();
-    const category=getDocumentCategory();
+    const doc_type=await getDocumentType();
+    const category=await getDocumentCategory();
     res.render("addFiles",{category,doc_type});
   } catch (err) {
     res.status(500).json(err);
@@ -89,8 +90,8 @@ router.post("/upload", upload.single('source_file'),async (req, res,next) => {
   try {
     var img_name=await save_document_image(req.file.filename);
     console.log(req.file, req.body,req.file.filename,img_name)
-    const doc_type=getDocumentType();
-    const category=getDocumentCategory();
+    const doc_type=await getDocumentType();
+    const category=await getDocumentCategory();
     res.render("addFiles",{category,doc_type});
   } catch (err) {
     res.status(500).json(err);
