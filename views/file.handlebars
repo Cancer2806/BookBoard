@@ -1,0 +1,23 @@
+ <main>
+     <div class="right-section"><a class="btnlink" data-price="{{price}}" id="btndownload" href="#" data-id="{{id}}" data-url="/uploads/doc/{{source_file}}" >Download</a><a class="btnlink" target="_blank" href="/uploads/doc/{{source_file}}">Read</a></div>
+     <div class="column">
+
+  <div class="row">
+    <div class="column">
+      <div ><img class="largeImg" src="/uploads/img/{{cover_art}}" /></div>
+      <div class="row">
+        <div class="header">{{title}}</div>
+        <div class="description"><strong>Description : </strong><br><br>{{brief_description}}</div>
+        <div class="content-text">Author : {{user.first_name}} {{user.last_name}}</div>
+         <div class="content-text">Category : {{category.category_name}}</div>
+          <div class="content-text">Document Type : {{type.type_name}}</div>
+      </div>
+      
+    </div>
+   
+    <div class="review">{{> review-detail}}</div>
+  </div>
+  <div class="width40">{{> download-detail}}</div>
+
+</div></main>
+<script src="../js/files.js"></script>
