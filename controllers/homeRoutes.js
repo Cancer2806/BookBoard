@@ -6,7 +6,7 @@ const fs = require('fs');
 const im  = require('imagemagick')
 var path = require('path');
 
-const { Categories, Types, Files } = require("../models");
+const { Categories, Types, Files, Users, Favourites, Reviews } = require("../models");
 const { sync } = require("../models/Users");
 const path_img = 'uploads/img/';
 const path_pdf = 'uploads/doc/';
@@ -19,6 +19,7 @@ var storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname)) //Appending extension
   }
 });
+
 var upload = multer({ storage: storage });
 
 var save_document_image=async(filename)=>{
@@ -72,11 +73,12 @@ router.get("/", async (req, res) => {
 
     const doc_type=await getDocumentType();
     const category=await getDocumentCategory();
-    res.render("addFiles",{category,doc_type});
+    res.render("homepage",{category,doc_type});
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 router.get("/upload", async (req, res) => {
   try {
     const doc_type=await getDocumentType();
@@ -86,6 +88,7 @@ router.get("/upload", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 router.post("/upload", upload.single('source_file'),async (req, res,next) => {
   try {
     var img_name=await save_document_image(req.file.filename);
@@ -97,6 +100,7 @@ router.post("/upload", upload.single('source_file'),async (req, res,next) => {
     res.status(500).json(err);
   }
 });
+
 router.get("/login", async (req, res) => {
   try {
     res.render("userLogin");
@@ -104,6 +108,23 @@ router.get("/login", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get("/profile/:id", async (req, res) => {
+  try {
+    const userData = await Users.findByPk(req.params.id, {
+      attributes: { exclude: ['password'] },
+      include: [{all: true, nested: true}],
+    });
+    
+    const user = userData.get({plain: true});
+    
+    // res.render("profile", {user});
+    res.json(user)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
 router.get("/register", async (req, res) => {
   try {
     res.render("signUp");
@@ -111,4 +132,7 @@ router.get("/register", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
+
 module.exports = router;
