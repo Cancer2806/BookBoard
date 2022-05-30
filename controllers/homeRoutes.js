@@ -6,10 +6,10 @@ const fs = require('fs');
 const im  = require('imagemagick')
 var path = require('path');
 const pdfConverter =require('pdf-poppler');
-const { Categories, Types, Files } = require("../models");
+const { Categories, Types, Files, Users } = require("../models");
 const { sync } = require("../models/Users");
-const path_img = 'uploads/img/';
-const path_pdf = 'uploads/doc/';
+const path_img = 'public/uploads/img/';
+const path_pdf = 'public/uploads/doc/';
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -26,7 +26,7 @@ function convertImage(pdfPath) {
 
   let option = {
       format : 'jpeg',
-      out_dir : 'uploads\\img',
+      out_dir : 'public\\uploads\\img',
       out_prefix : path.basename(pdfPath, path.extname(pdfPath)),
       page : 1
   }
@@ -61,8 +61,37 @@ const getDocumentType=async ()=>
 
 router.get("/", async (req, res) => {
   try {
-  
-    res.render("homepage");
+    const docs = await Files.findAll({
+      limit: 8,
+      order:[['id','DESC']]
+      
+    });
+
+    const docs1 = await Files.findAll({
+      limit: 4 ,
+      order:[['id','DESC']],
+      include: [
+        {
+          model: Users,
+          attributes: ["first_name","last_name"],
+        },
+        {
+          model: Categories,
+          attributes: ["category_name"],
+        },
+        {
+          model: Types,
+          attributes: ["type_name"],
+        }
+      ],
+    });
+
+    // Serialize data so the template can read it
+    const recomendedDoc = docs.map((doc) => doc.get({ plain: true }));
+    const popularDoc = docs1.map((doc) => doc.get({ plain: true }));
+
+    
+    res.render("homepage",{recomendedDoc,popularDoc,latestdoc:popularDoc});
   } catch (err) {
     res.status(500).json(err);
   }
