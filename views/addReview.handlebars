@@ -1,35 +1,36 @@
-<form>
+<form class="review-form">
   <div class="form-style">
     <div class="header-tab">Add Review</div>
-    <div class="row"><label>Comment</label><input
-        id="review_content"
-        class="form-input"
-      /></div>
+    <div class="row"><label>Comment</label>
+    <textarea rows="4" cols="50" id="review_content"
+        class="form-input"></textarea>
+        <input type="hidden" id="file_id" value="{{{id}}}">
+  </div>
     <div class="row"><label>Rating</label>
       <div class="rating"><label>
-          <input type="radio" name="stars" value="1" />
+          <input type="radio" name="stars" id="stars" value="1" />
           <span class="icon">★</span>
         </label>
         <label>
-          <input type="radio" name="stars" value="2" />
-          <span class="icon">★</span>
-          <span class="icon">★</span>
-        </label>
-        <label>
-          <input type="radio" name="stars" value="3" />
-          <span class="icon">★</span>
+          <input type="radio" name="stars" id="stars" value="2" />
           <span class="icon">★</span>
           <span class="icon">★</span>
         </label>
         <label>
-          <input type="radio" name="stars" value="4" />
-          <span class="icon">★</span>
+          <input type="radio" name="stars" id="stars" value="3" />
           <span class="icon">★</span>
           <span class="icon">★</span>
           <span class="icon">★</span>
         </label>
         <label>
-          <input type="radio" name="stars" value="5" />
+          <input type="radio" name="stars" id="stars" value="4" />
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+          <span class="icon">★</span>
+        </label>
+        <label>
+          <input type="radio" name="stars" id="stars" value="5" />
           <span class="icon">★</span>
           <span class="icon">★</span>
           <span class="icon">★</span>
@@ -42,3 +43,4 @@
       >Submit</button></div>
   </div>
 </form>
+<script src="../js/review.js"></script>

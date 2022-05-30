@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
       
       const downloadData = await Downloads.create({
         price:req.body.price,
-        user_id: req.session.user_id,
+        user_id: 1,
         file_id:req.body.file_id,
       
       });

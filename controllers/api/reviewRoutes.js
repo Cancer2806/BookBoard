@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
       const reviewData = await Reviews.create({
         review_content:req.body.review_content,
         rating:req.body.rating,
-        user_id: req.session.user_id,
+        user_id: 1,
         file_id:req.body.file_id,
       });
   

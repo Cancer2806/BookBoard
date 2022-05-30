@@ -1,0 +1,9 @@
+<div class="header-without-background">Review Detail</div>
+<div class="right-section"> <a href="/addreview/{{id}}" class="btnlink">Add Review</a></div>
+<table class="grid">
+  <tr><th>User</th><th>Comment</th></tr>
+  {{#each reviews as |item|}}
+    <tr><td>{{item.user.first_name}}</td><td>{{item.review_content}}</td></tr>
+  {{/each}}
+  <tr></tr>
+</table>
