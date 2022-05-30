@@ -3,24 +3,28 @@
     "title": "A brief history of nothingness",
     "brief_description": "The truth behind nothing",
     "price": 24.99,
-    "source_file": "placeholder"
+    "source_file": "1653807119399.pdf",
+    "cover_art":"1653807119399-1.jpg"
   },
   {
     "title": "The endless travels of Hibbert",
     "brief_description": "Hibbert again finds himself lost in the immense void",
     "price": 0,
-    "source_file": "placeholder"
+    "source_file": "1653807119399.pdf",
+    "cover_art":"1653807119399-1.jpg"
   },
   {
     "title": "Four is also a crowd",
     "brief_description": "The true story of why there is no truth",
     "price": 15.99,
-    "source_file": "placeholder"
+    "source_file": "1653807119399.pdf",
+    "cover_art":"1653807119399-1.jpg"
   },
   {
     "title": "A brief history of nothingness",
     "brief_description": "the authors first attempt at getting paid for producing garbage",
     "price": 24.99,
-    "source_file": "placeholder"
+    "source_file": "1653807119399.pdf",
+    "cover_art":"1653807119399-1.jpg"
   }
 ]
