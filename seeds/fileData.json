@@ -3,28 +3,35 @@
     "title": "A brief history of nothingness",
     "brief_description": "The truth behind nothing",
     "price": 24.99,
-    "source_file": "1653807119399.pdf",
-    "cover_art":"1653807119399-1.jpg"
+    "source_file": "1653917291152.pdf",
+    "cover_art":"1653917291152-01.jpg"
   },
   {
     "title": "The endless travels of Hibbert",
     "brief_description": "Hibbert again finds himself lost in the immense void",
     "price": 0,
-    "source_file": "1653807119399.pdf",
-    "cover_art":"1653807119399-1.jpg"
+    "source_file": "1653917421109.pdf",
+    "cover_art":"1653917421109-01.jpg"
   },
   {
     "title": "Four is also a crowd",
     "brief_description": "The true story of why there is no truth",
     "price": 15.99,
-    "source_file": "1653807119399.pdf",
-    "cover_art":"1653807119399-1.jpg"
+    "source_file": "1653917510841.pdf",
+    "cover_art":"1653917510841-1.jpg"
   },
   {
-    "title": "A brief history of nothingness",
+    "title": "The deep Emptiness of Silence",
     "brief_description": "the authors first attempt at getting paid for producing garbage",
     "price": 24.99,
-    "source_file": "1653807119399.pdf",
-    "cover_art":"1653807119399-1.jpg"
+    "source_file": "1653917589119.pdf",
+    "cover_art":"1653917589119-1.jpg"
+  }
+  {
+    "title": "Loneliness of the Long Distance Programmer",
+    "brief_description": "a satirical look at the working from home phenomenon",
+    "price": 24.99,
+    "source_file": "1653917677288.pdf",
+    "cover_art": "1653917677288-1.jpg"
   }
 ]

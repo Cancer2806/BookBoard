@@ -26,12 +26,12 @@ Files.init(
       type: DataTypes.DECIMAL(4, 2),
       allowNull: true,
     },
-    // holds details of where to find file
+    // name of the pdf file
     source_file: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // holds the cover art image
+    // name of the cover art image
     cover_art: {
       type: DataTypes.STRING,
       allowNull: true,
