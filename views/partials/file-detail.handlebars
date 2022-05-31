@@ -1,28 +1,28 @@
 <div class="content-box">
   <div class="content-header flex">
     <div class="header-title">
-      <h3>{{title}}</h3>
-      <p class="italic">${{price}} <span>• (122pp)</span></p>
+      <h3>{{file.title}}</h3>
+      <p class="italic">${{file.price}} <span>• (122pp)</span></p>
     </div>
     <div class="header-cover">
-      <img src="uploads/img/{{cover_art}}" alt="image" class="cover-thumb" />
+      <img src="uploads/img/{{file.cover_art}}" alt="image" class="cover-thumb" />
     </div>
   </div>
 
   <div class="content-body">
     <div class="content-nav">
-      <p class="content-item"><a href="/profile/{{user_id}}">{{user.first_name}}
-          {{user.last_name}}
+      <p class="content-item"><a href="/profile/{{file.user_id}}">{{file.user.first_name}}
+          {{file.user.last_name}}
         </a></p>
     </div>
     <div class="content-nav">
-      <p class="content-item">{{category.category_name}}</p>
+      <p class="content-item">{{file.category.category_name}}</p>
     </div>
     <div class="content-nav">
-      <p class="content-item"><span>{{type.type_name}}</span></p>
+      <p class="content-item"><span>{{file.type.type_name}}</span></p>
     </div>
     <div class="content-nav">
-      <a href="/file/{{id}}" class="read-btn">Read</a>
+      <a href="/file/{{file.id}}" class="read-btn">Read</a>
     </div>
 
   </div>
