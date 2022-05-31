@@ -247,6 +247,8 @@ h2 {
   margin: 0px 0 10px 0;
   font-weight: bold;
   padding-left: 15px;
+  font-family:'Courier New', Courier, monospace;
+  
 }
 
 .popular-btn, .recent-btn {
@@ -610,4 +612,5 @@ footer {
   .content-box {
     width: 100%;
   }
+  
 }
