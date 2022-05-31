@@ -17,7 +17,7 @@ p {
 
 body {
   font-family: -apple-system, "Helvetica", sans-serif;
-  font-size: 13px;
+  font-size: 1vw;
 }
 
 header {
@@ -182,11 +182,13 @@ main {
 
 h3 {
   font-weight:normal;
+  font-size: 1.1vw;
 }
 
 .italic {
   font-style: italic; 
   font-weight: 50;
+  font-size: 1.1vw;
 }
 
 .header-cover {
