@@ -19,6 +19,7 @@ var storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
   },
 });
+
 var upload = multer({ storage: storage });
 
 function convertImage(pdfPath,imgpath,page) {
@@ -130,6 +131,7 @@ router.get("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 router.get("/upload", async (req, res) => {
   try {
     const doc_type = await getDocumentType();
@@ -171,6 +173,7 @@ router.post("/upload", upload.single("source_file"), async (req, res, next) => {
     res.status(500).json(err);
   }
 });
+
 router.get("/login", async (req, res) => {
   try {
     res.render("userLogin");
@@ -178,6 +181,23 @@ router.get("/login", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get("/profile/:id", async (req, res) => {
+  try {
+    const userData = await Users.findByPk(req.params.id, {
+      attributes: { exclude: ['password'] },
+      include: [{all: true, nested: true}],
+    });
+    
+    const user = userData.get({plain: true});
+    
+    res.render("profile", {user});
+    // res.json(user)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+})
+
 router.get("/register", async (req, res) => {
   try {
     res.render("signUp");
