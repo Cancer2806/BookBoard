@@ -211,7 +211,7 @@ h3 {
 .content-nav {
   width: 100%;
   /* border-bottom: 1px var(--light-accent) solid; */
-  height: 35px;
+  /* height: 35px; */
   padding: 10px 10px 0 10px;
   display: flex;
   flex-direction: column;
@@ -474,7 +474,7 @@ footer {
   height: 75px;
 }
 
-.form-input, .form-label {
+.form-in, .form-label {
   /* margin-top: 10px; */
   line-height: 25px;
 }
