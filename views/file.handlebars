@@ -4,17 +4,17 @@
 
   <div class="row">
     <div class="column">
-      <div ><img class="largeImg" src="/uploads/img/{{cover_art}}" /></div>
+      <div ><img class="largeImg" src="/uploads/img/{{fileobj.cover_art}}" /></div>
       <div class="row">
-        <div class="header">{{title}}</div>
-        <div class="description"><strong>Description : </strong><br><br>{{brief_description}}</div>
-        <div class="content-text">Author : {{user.first_name}} {{user.last_name}}</div>
-         <div class="content-text">Category : {{category.category_name}}</div>
-          <div class="content-text">Document Type : {{type.type_name}}</div>
+        <div class="header">{{fileobj.title}}</div>
+        <div class="description"><strong>Description : </strong><br><br>{{fileobj.brief_description}}</div>
+        <div class="content-text">Author : {{fileobj.user.first_name}} {{fileobj.user.last_name}}</div>
+         <div class="content-text">Category : {{fileobj.category.category_name}}</div>
+          <div class="content-text">Document Type : {{fileobj.type.type_name}}</div>
       </div>
       
     </div>
-   
+    <div class="review">{{> file-preview }}</div>
     <div class="review">{{> review-detail}}</div>
   </div>
   <div class="width40">{{> download-detail}}</div>
