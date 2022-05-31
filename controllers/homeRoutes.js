@@ -1,22 +1,12 @@
 const router = require("express").Router();
 
 const withAuth = require("../utils/auth");
-<<<<<<< HEAD
-const multer  = require('multer')
-const fs = require('fs');
-const im  = require('imagemagick')
-var path = require('path');
-
-const { Categories, Types, Files, Users, Favourites, Reviews } = require("../models");
-const pdfConverter =require('pdf-poppler');
-=======
 const multer = require("multer");
 const fs = require("fs");
 const im = require("imagemagick");
 var path = require("path");
 const pdfConverter = require("pdf-poppler");
-const { Categories, Types, Files, Users, Reviews, Downloads } = require("../models");
->>>>>>> origin/main
+const { Categories, Types, Files, Users, Reviews, Downloads, Favourites } = require("../models");
 const { sync } = require("../models/Users");
 const path_img = "public/uploads/img/";
 const path_pdf = "public/uploads/doc/";
@@ -114,12 +104,7 @@ router.get("/upload", async (req, res) => {
     res.status(500).json(err);
   }
 });
-<<<<<<< HEAD
-
-router.post("/upload", upload.single('source_file'),async (req, res,next) => {
-=======
 router.get("/addreview/:id", async (req, res) => {
->>>>>>> origin/main
   try {
    res.render("addReview",{id:req.params.id});
   } catch (err) {
@@ -183,12 +168,6 @@ router.get("/register", async (req, res) => {
     res.status(500).json(err);
   }
 });
-<<<<<<< HEAD
-
-router.get("/search", async (req, res) => {
-  try {
-    res.render("search");
-=======
 router.get("/file/:id", async (req, res) => {
   try {
 
@@ -220,16 +199,8 @@ router.get("/file/:id", async (req, res) => {
     });
     const fileobj = data.get({ plain: true });
     res.render("file",fileobj);
->>>>>>> origin/main
   } catch (err) {
     res.status(500).json(err);
   }
 });
-<<<<<<< HEAD
-
-
-
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> origin/main
