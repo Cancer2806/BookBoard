@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const sequelize = require('../config/connection');
 const withAuth = require("../utils/auth");
 const multer = require("multer");
 const fs = require("fs");
@@ -96,7 +96,9 @@ router.get("/", async (req, res) => {
    
     const docs = await Files.findAll({
       limit: 8,
-      order: [["id", "DESC"]],
+      order: [
+        [sequelize.literal('RAND()')]
+      ],
     });
 
     const docs1 = await Files.findAll({
@@ -117,15 +119,41 @@ router.get("/", async (req, res) => {
         },
       ],
     });
+    const docs2 = await Downloads.findAll({
+      limit: 4,
+      group: ["file_id"],
+    order: [[sequelize.col("CountedValue"), "DESC"]],
+      attributes:[ [sequelize.fn("COUNT", "1"), "CountedValue"],"file_id"],
+      include:[{model:Files,
+      attributes:["id","title","brief_description","price","source_file","cover_art","user_id"],
+      include: [
+        {
+          model: Users,
+          attributes: ["first_name", "last_name"],
+        },
+        {
+          model: Categories,
+          attributes: ["category_name"],
+        },
+        {
+          model: Types,
+          attributes: ["type_name"],
+        },
+       
+      ],
+    }]
+      
+    });
 
     // Serialize data so the template can read it
-    const recomendedDoc = docs.map((doc) => doc.get({ plain: true }));
-    const popularDoc = docs1.map((doc) => doc.get({ plain: true }));
+    const randomDoc = docs.map((doc) => doc.get({ plain: true }));
+    const latestdoc = docs1.map((doc) => doc.get({ plain: true }));
+    const popularDoc = docs2.map((doc) => doc.get({ plain: true }));
 
     res.render("homepage", {
-      recomendedDoc,
+      randomDoc,
       popularDoc,
-      latestdoc: popularDoc,
+      latestdoc,
     });
   } catch (err) {
     res.status(500).json(err);
