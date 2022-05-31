@@ -61,5 +61,19 @@
     "price": 11.60,
     "source_file": "1653989377801.pdf",
     "cover_art": "1653989377801-001.jpg"
+  },
+  {
+    "title": "The endless travels of Hibbert",
+    "brief_description": "Hibbert again finds himself lost in the immense void",
+    "price": 0,
+    "source_file": "1653917421109.pdf",
+    "cover_art": "1653917421109-01.jpg"
+  },
+  {
+    "title": "A brief history of nothingness",
+    "brief_description": "The truth behind nothing",
+    "price": 24.99,
+    "source_file": "1653917291152.pdf",
+    "cover_art": "1653917291152-01.jpg"
   }
 ]
