@@ -26,12 +26,40 @@
     "price": 24.99,
     "source_file": "1653917589119.pdf",
     "cover_art":"1653917589119-1.jpg"
-  }
+  },
   {
     "title": "Loneliness of the Long Distance Programmer",
     "brief_description": "a satirical look at the working from home phenomenon",
-    "price": 24.99,
+    "price": 6.80,
     "source_file": "1653917677288.pdf",
     "cover_art": "1653917677288-1.jpg"
+  },
+  {
+    "title": "Bringing it all Together",
+    "brief_description": "a quick review of how to make it all work",
+    "price": 4.99,
+    "source_file": "1653989336623.pdf",
+    "cover_art": "1653989336623-001.jpg"
+  },
+  {
+    "title": "Three's a Crowd",
+    "brief_description": "A review of the Harry, Ron dynamic in Harry Potter",
+    "price": 5.20,
+    "source_file": "1653989354641.pdf",
+    "cover_art": "1653989354641-01.jpg"
+  },
+  {
+    "title": "Howling at the Moon",
+    "brief_description": "seeing it from the dog's point of view",
+    "price": 11.60,
+    "source_file": "1653989365805.pdf",
+    "cover_art": "1653989365805-001.jpg"
+  },
+  {
+    "title": "Footsteps in the Backyard",
+    "brief_description": "A ghostly tale in suburbia",
+    "price": 11.60,
+    "source_file": "1653989377801.pdf",
+    "cover_art": "1653989377801-001.jpg"
   }
 ]
