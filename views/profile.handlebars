@@ -3,8 +3,8 @@
         <div class="account-box account">
             <div class="content-header flex">
               <div class="header-title">
-                <h3>{{first_name}} {{last_name}}</h3> 
-                <p class="italic">{{email}}</p> 
+                <h3>{{user.first_name}} {{user.last_name}}</h3> 
+                <p class="italic">{{user.email}}</p> 
               </div>
             </div>
             <div class="content-desc">
@@ -22,9 +22,9 @@
             </div>
             <div class="content-desc">
               <div class="stats-content">
-                <p>Profit: </p>
-                <p>Downloads:</p>
-                <p>Average Rating:</p>
+                <p>Profit: ${{ get_profit_total user.files}}</p>
+                <p>Downloads: {{get_downloads_total user.files}}</p>
+                <p>Average Rating: {{get_rating_average user.files}}/5</p>
               </div>
             </div>
         </div>
@@ -37,18 +37,9 @@
             </div>
             <div class="content-desc">
               <div class="content-row">
-                <a href="" class="row-img">
-                  <img src="/img/placeholder3.jpg" alt="" class="row-img">
-                </a>
-                <a href="" class="row-img">
-                  <img src="/img/placeholder.jpg" alt="" class="row-img">
-                </a>
-                <a href="" class="row-img">
-                  <img src="/img/placeholder2.jpg" alt="" class="row-img">
-                </a>
-                <a href="" class="row-img">
-                  <img src="/img/placeholder.jpg" alt="" class="row-img">
-                </a>
+                {{#each user.files as |file|}}
+                  {{> image-row}}
+                {{/each}}
               </div>
             </div>
         </div>
@@ -60,18 +51,9 @@
             </div>
             <div class="content-desc">
               <div class="content-row">
-                <a href="" class="row-img">
-                  <img src="/img/placeholder3.jpg" alt="" class="row-img">
-                </a>
-                <a href="" class="row-img">
-                  <img src="/img/placeholder.jpg" alt="" class="row-img">
-                </a>
-                <a href="" class="row-img">
-                  <img src="/img/placeholder2.jpg" alt="" class="row-img">
-                </a>
-                <a href="" class="row-img">
-                  <img src="/img/placeholder.jpg" alt="" class="row-img">
-                </a>
+                {{#each user.favourites as |favourite|}}
+                  {{> upload-row}}
+                {{/each}}
               </div>
             </div>
         </div>

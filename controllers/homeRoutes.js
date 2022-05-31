@@ -150,8 +150,8 @@ router.get("/profile/:id", async (req, res) => {
     
     const user = userData.get({plain: true});
     
-    // res.render("profile", {user});
-    res.json(user)
+    res.render("profile", {user});
+    // res.json(user)
   } catch (err) {
     res.status(500).json(err);
   }
@@ -160,6 +160,14 @@ router.get("/profile/:id", async (req, res) => {
 router.get("/register", async (req, res) => {
   try {
     res.render("signUp");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/search", async (req, res) => {
+  try {
+    res.render("search");
   } catch (err) {
     res.status(500).json(err);
   }
