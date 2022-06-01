@@ -37,10 +37,11 @@ const convertImage = async (pdfPath, imgpath, page) => {
     page: page,
   };
   // option.out_dir value is the path where the image will be saved
-
+console.log(option);
   await pdfConverter
     .convert(pdfPath, option)
-    .then(() => {
+    .then((res) => {
+      console.log(res);
       console.log("file converted");
     })
     .catch((err) => {
@@ -213,8 +214,8 @@ router.post("/upload", upload.single("source_file"), async (req, res, next) => {
       cover_art: img_name,
       type_id: req.body.type_id,
       category_id: req.body.category_id,
-      source_file: req.file.filename,
-      user_id: 1,
+      source_file: req.file.filename
+     
     });
     // console.log(req.file, req.body,req.file.filename,img_name)
     console.log(fileData);
