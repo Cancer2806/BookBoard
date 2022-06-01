@@ -1,29 +1,33 @@
 <div class="search-card">
 
-    <div class="search-col-img">
-        <div class="search-cover">
-            <img src="/uploads/img/{{this.cover_art}}" alt="image" class="search-thumb">
-        </div>
+  <div class="search-col-img">
+    <div class="search-cover">
+      <img
+        src="/uploads/img/{{this.cover_art}}"
+        alt="image"
+        class="search-thumb"
+      />
     </div>
-    <div class="search-col-body">
-        <div class="search-box">
-            <div class="search-header flex">
-              <div class="header-title">
-                <h3>{{this.title}}</h3> 
-                <p class="italic">${{this.price}}</p> 
-              </div>
-            </div>
-            <div class="search-body">
-                <div class="search-desc">
-                    <p>{{this.brief_description}}</p>
-                </div>
-                <div class="search-links">
+  </div>
+  <div class="search-col-body">
+    <div class="search-box">
+      <div class="search-header flex">
+        <div class="header-title">
+          <h3>{{this.title}}</h3>
+          <p class="italic">${{this.price}}</p>
+        </div>
+      </div>
+      <div class="search-body">
+        <div class="search-desc">
+          <p>{{this.brief_description}}</p>
+        </div>
+        <div class="search-links">
 
-                    <div class="search-nav">
-                        <a href="/file/{{this.id}}" class="read-btn">Read</a>            
-                    </div>
-                </div>
-            </div>
-    </div>  
+          <div class="search-nav">
+            <a href="/file/{{this.id}}" class="read-btn">Read</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
