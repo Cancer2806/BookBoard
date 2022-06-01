@@ -1,16 +1,16 @@
 const router = require("express").Router();
-
+const sequelize = require('../config/connection');
 const withAuth = require("../utils/auth");
 const multer = require("multer");
-const fs = require("fs");
+const { promises: fs } = require("fs");
 const im = require("imagemagick");
 var path = require("path");
 const pdfConverter = require("pdf-poppler");
 const { Categories, Types, Files, Users, Reviews, Downloads } = require("../models");
 const { sync } = require("../models/Users");
-const path_img = "public/uploads/img/";
+const path_temp = "public/uploads/temp/";
 const path_pdf = "public/uploads/doc/";
-
+const path_img = "public/uploads/img/";
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path_pdf);
@@ -22,16 +22,16 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-function convertImage(pdfPath) {
+const convertImage=async (pdfPath,imgpath,page)=> {
   let option = {
     format: "jpeg",
-    out_dir: "public\\uploads\\img",
+    out_dir: imgpath,
     out_prefix: path.basename(pdfPath, path.extname(pdfPath)),
-    page: 1,
+    page: page,
   };
   // option.out_dir value is the path where the image will be saved
 
-  pdfConverter
+  await pdfConverter
     .convert(pdfPath, option)
     .then(() => {
       console.log("file converted");
@@ -41,7 +41,46 @@ function convertImage(pdfPath) {
     });
   return path.basename(pdfPath, path.extname(pdfPath));
 }
+var resultHandler = function(err) { 
+  if(err) {
+     console.log("unlink failed", err);
+  } else {
+     console.log("file deleted");
+  }
+}
+const loadTempPdfImages=async (source_file) =>{
+  var img_list=[];
+  try {
+    const files = await fs.readdir(path_temp);
+    if(files)
+    {
+      const unlinkPromises =await files.map(filename => fs.unlink(`${path_temp}/${filename}`,resultHandler));
+      await Promise.all(unlinkPromises);
+    }
+    await convertImage(path.join(path_pdf,source_file),path_temp,null)
+    await fs.readdir(path_temp).then((files_new)=>{
+      let count=0;
+      //listing all files using forEach
+      files_new.forEach(function (file) {
+      count=count+1;
+        if(count<5)
+        {
+          img_list.push(file);
+        }
+       
+    });
 
+    });
+  
+   
+   
+  
+
+  } catch(err) {
+    console.log(err);
+  }
+ return img_list;
+}
 const getDocumentCategory = async () => {
   const data1 = await Categories.findAll();
   const category = data1.map((data) => data.get({ plain: true }));
@@ -57,9 +96,12 @@ const getDocumentType = async () => {
 
 router.get("/", async (req, res) => {
   try {
+   
     const docs = await Files.findAll({
       limit: 8,
-      order: [["id", "DESC"]],
+      order: [
+        [sequelize.literal('RAND()')]
+      ],
     });
 
     const docs1 = await Files.findAll({
@@ -80,15 +122,41 @@ router.get("/", async (req, res) => {
         },
       ],
     });
+    const docs2 = await Downloads.findAll({
+      limit: 4,
+      group: ["file_id"],
+    order: [[sequelize.col("CountedValue"), "DESC"]],
+      attributes:[ [sequelize.fn("COUNT", "1"), "CountedValue"],"file_id"],
+      include:[{model:Files,
+      attributes:["id","title","brief_description","price","source_file","cover_art","user_id"],
+      include: [
+        {
+          model: Users,
+          attributes: ["first_name", "last_name"],
+        },
+        {
+          model: Categories,
+          attributes: ["category_name"],
+        },
+        {
+          model: Types,
+          attributes: ["type_name"],
+        },
+       
+      ],
+    }]
+      
+    });
 
     // Serialize data so the template can read it
-    const recomendedDoc = docs.map((doc) => doc.get({ plain: true }));
-    const popularDoc = docs1.map((doc) => doc.get({ plain: true }));
+    const randomDoc = docs.map((doc) => doc.get({ plain: true }));
+    const latestdoc = docs1.map((doc) => doc.get({ plain: true }));
+    const popularDoc = docs2.map((doc) => doc.get({ plain: true }));
 
     res.render("homepage", {
-      recomendedDoc,
+      randomDoc,
       popularDoc,
-      latestdoc: popularDoc,
+      latestdoc,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -114,7 +182,7 @@ router.get("/addreview/:id", async (req, res) => {
 router.post("/upload", upload.single("source_file"), async (req, res, next) => {
   try {
     var img_name = await convertImage(
-      path.join(req.file.destination, req.file.filename)
+      path.join(req.file.destination, req.file.filename),path_img,1
     );
     img_name = img_name + "-1.jpg";
 
@@ -290,7 +358,8 @@ router.get("/file/:id", async (req, res) => {
       ],
     });
     const fileobj = data.get({ plain: true });
-    res.render("file",fileobj);
+    const preview_img=await loadTempPdfImages(fileobj.source_file);
+     res.render("file",{fileobj,preview_img});
   } catch (err) {
     res.status(500).json(err);
   }

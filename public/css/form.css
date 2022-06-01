@@ -14,7 +14,7 @@
   color: white;
 
   height: 35px;
-
+font-size: .8vw;
   width: 100px;
   font-weight: bold;
 }
@@ -58,71 +58,7 @@ main {
   display: flex;
   flex-direction: column;
 }
-/* .rating {
-  display: inline-block;
-  position: relative;
-  height: 50px;
-  line-height: 50px;
-  font-size: 50px;
-}
 
-.rating label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  cursor: pointer;
-}
-
-.rating label:last-child {
-  position: static;
-}
-
-.rating label:nth-child(1) {
-  z-index: 5;
-}
-
-.rating label:nth-child(2) {
-  z-index: 4;
-}
-
-.rating label:nth-child(3) {
-  z-index: 3;
-}
-
-.rating label:nth-child(4) {
-  z-index: 2;
-}
-
-.rating label:nth-child(5) {
-  z-index: 1;
-}
-
-.rating label input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-}
-
-.rating label .icon {
-  float: left;
-  color: transparent;
-}
-
-.rating label:last-child .icon {
-  color: #000;
-}
-
-.rating:not(:hover) label input:checked ~ .icon,
-.rating:hover label:hover input ~ .icon {
-  color: #09f;
-}
-
-.rating label input:focus:not(:checked) ~ .icon:last-child {
-  color: #000;
-  text-shadow: 0 0 5px #09f;
-} */
 .column {
   display: flex;
   flex-direction: row;
@@ -146,7 +82,7 @@ main {
 .header-without-background
 {
   font-family:'Courier New', Courier, monospace;
-  font-size: 18px;
+  font-size: 2vw;
   font-weight: 900;
   padding: 10px;
 }
@@ -156,8 +92,8 @@ main {
   font-family:'Courier New', Courier, monospace;
   border-radius: 5px;
   color: white;
-  font-size: 16px;
-  height: 40px;
+  font-size: 1.8vw;
+ 
   text-align: center;
   width: 100%;
   font-weight: bold;
@@ -165,12 +101,12 @@ main {
   margin-bottom: 30px;
 }
 .description {
-  font-size: 12px;
+  font-size: .8vw;
   font-style: italic;
   margin-bottom: 10px;
 }
 .content-text {
-  font-size: 12px;
+  font-size: .8vw;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -182,6 +118,7 @@ table {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
+  font-size: .8vw;
 }
 
 table td,
@@ -205,9 +142,7 @@ table th {
   background-color: var(--dark-accent);
   color: white;
 }
-.review {
-  border: 1px solid #000;
-}
+
 
 .right-section
 {
@@ -225,9 +160,47 @@ table th {
   border-radius: 5px;
   font-weight: 900;
   margin-left: 5px;
+  font-size: .8vw;
 }
 
 .btnlink:hover, .btnlink:active {
   background-color: white;
   color: var(--dark-accent);
+}
+.smallimg
+{
+  width: 100px;
+  height: auto;
+}
+.preview
+{
+  /* border: 1px solid #000; */
+  padding: 10px;
+  margin-bottom: 10px;
+}
+@media only screen and (max-width: 480px) {
+  .largeImg
+  {
+    height: 100px;
+  }
+  .column
+  {
+    flex-direction:column
+  }
+  .width40
+  {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .largeImg
+  {
+    height: 200px;
+  }
+}
+@media only screen and (max-width: 1080px) {
+  .largeImg
+  {
+    height: 300px;
+  }
 }

@@ -1,7 +1,8 @@
   <main>
     <section class="hero">
+       <h2>Random Colleaction</h2>
       <div class="hero-content">
-        {{#each recomendedDoc as |doc|}}
+        {{#each randomDoc as |doc|}}
 {{> file-detail-hero}}
 {{/each}}
        
@@ -29,8 +30,8 @@
 
       <div class="recent-content">
 
-        {{#each popularDoc as |doc|}}
-{{> file-detail}}
+        {{#each latestdoc as |doc|}}
+{{> file-detail-latest}}
 {{/each}}
       </div>
 

@@ -4,15 +4,18 @@ const { Favourites } = require('../../models');
 //Add new favourite method
 router.post('/', async (req, res) => {
     try {
-      
+      const odata=await Favourites.findOne({where:{file_id:req.body.file_id,user_id:1}});
+      if(!odata)
+      {
       const data = await Favourites.create({
         rating:req.body.rating,
-        user_id: req.session.user_id,
+        user_id: 1,
         file_id:req.body.file_id,
       
       });
-  
       res.status(200).json(data);
+    }
+      res.status(200).json(odata);
     } catch (err) {
       res.status(400).json(err);
     }

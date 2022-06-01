@@ -17,7 +17,7 @@ p {
 
 body {
   font-family: -apple-system, "Helvetica", sans-serif;
-  font-size: 13px;
+  font-size: 1vw;
 }
 
 header {
@@ -114,7 +114,7 @@ main {
 }
 
 .hero {
-  height: calc(100vh - 100px);
+  /* height: calc(100vh - 100px); */
   /* background: #3c3c43; */
   /* padding: 50px 0; */
 }
@@ -182,11 +182,13 @@ main {
 
 h3 {
   font-weight:normal;
+  font-size: 1.1vw;
 }
 
 .italic {
   font-style: italic; 
   font-weight: 50;
+  font-size: 1.1vw;
 }
 
 .header-cover {
@@ -247,6 +249,8 @@ h2 {
   margin: 0px 0 10px 0;
   font-weight: bold;
   padding-left: 15px;
+  font-family:'Courier New', Courier, monospace;
+  
 }
 
 .popular-btn, .recent-btn {
@@ -272,7 +276,7 @@ h2 {
 }
 
 .hero-img {
-  height: 90%;
+  height: 150px;
   transition: all 0.25s linear;
   z-index: 0;
 }
@@ -628,4 +632,5 @@ footer {
   .content-box {
     width: 100%;
   }
+  
 }
