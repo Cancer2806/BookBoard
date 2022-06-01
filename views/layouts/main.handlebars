@@ -1,54 +1,69 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BookBoard</title>
-  <link rel="stylesheet" href="/css/style.css">
-   <link rel="stylesheet" href="/css/form.css">
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-   
-</head>
-<body>
-  
-  <header>
-    <div class="header-wrapper flex">
-      <div class="logo-sec flex">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BookBoard</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/form.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
 
-       <img src="#" alt="BookBoard">
+  </head>
+  <body>
+
+    <header>
+      <div class="header-wrapper flex">
+        <div class="logo-sec flex">
+          <h3>Book Board</h3>
+          {{! <img src="#" alt="BookBoard"> }}
+        </div>
+        <div class="search-sec flex">
+          <form action="/search" method="get" class="search-form flex">
+            <input type="text" id="title" name="title" class="search-field" />
+            <input type="submit" class="search-submit" value="Search" />
+          </form>
+        </div>
+        <div class="nav-sec">
+ <div class="nav-item flex">
+              <p><a href="/">Home</a></p>
+            </div>
+          {{#if logged_in}}
+            <div class="nav-item flex">
+              <p><a href="/upload">Upload</a></p>
+            </div>
+            <div class="nav-item flex">
+              <p><a href="/profile/{{user_id}}">Profile</a></p>
+            </div>
+             <div class="nav-item flex">
+              <p><a href="/logout">Logout</a></p>
+            </div>
+          {{else}}
+            <div class="nav-item flex">
+              <p><a href="/login">Login</a></p>
+            </div>
+            <div class="nav-item flex">
+              <p><a href="/register">Register</a></p>
+            </div>
+          {{/if}}
+        </div>
       </div>
-      <div class="search-sec flex">
+      <div class="menu-button">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <div class="menu-close">
+        ✕
+      </div>
+      <div class="h-menu">
         <form class="search-form flex">
-          <input type="text" class="search-field">
-          <input type="submit" class="search-submit" value="Search">
-        </form>
-      </div>
-      <div class="nav-sec">
-        <div class="nav-item flex">
-          <p><a href="/upload">Upload</a></p>
-        </div>
-        <div class="nav-item flex">
-          <p><a href="/login">Login</a></p>
-        </div>
-        <div class="nav-item flex">
-          <p><a href="/register">Register</a></p>
-        </div>
-      </div>
-    </div>
-        <div class="menu-button">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-    </div>
-    <div class="menu-close">
-      ✕
-    </div>
-    <div class="h-menu">
-        <form class="search-form flex">
-          <input type="text" class="search-field">
-          <input type="submit" class="search-submit" value="Search">
+          <input type="text" class="search-field" />
+          <input type="submit" class="search-submit" value="Search" />
         </form>
         <div class="nav-item flex">
           <a href="/upload" class="h-items">Upload</a>
@@ -59,20 +74,19 @@
         <div class="nav-item flex">
           <a href="/register" class="h-items">Register</a>
         </div>
-    </div>
-  </header>
-  <div class="gap"></div>
-<main>
-  {{{body}}}
-</main>
+      </div>
+    </header>
+    <div class="gap"></div>
+    <main>
+      {{{body}}}
+    </main>
 
+    <footer>
+      <p>
+        Copyright (C) 2022 BookBoard All Rights Reserved
+      </p>
+    </footer>
 
-  <footer>
-    <p>
-      Copyright (C) 2022 BookBoard All Rights Reserved
-    </p>
-  </footer>
-
-  <script src="/js/main.js"></script>
-</body>
+    <script src="/js/main.js"></script>
+  </body>
 </html>
