@@ -241,7 +241,7 @@ router.get("/search", async (req, res) => {
   try {
     const doc_type = await getDocumentType();
     const category = await getDocumentCategory();
-    // console.log(req.query)
+    console.log(req.query)
 
     const searchQuery = await Files.findAll({
       include: [        
@@ -276,13 +276,19 @@ router.get("/search", async (req, res) => {
     console.log("\n__________________________\n")
     if (req.query.genre) {
       result3 = result2.filter((query) => {
+        if(Array.isArray(req.query.genre))
+        {
         // query.category_id === req.query.genre
         return req.query.genre.some((f) => {
           // console.log(f)
           // console.log("\n__________________________\n")
           // console.log(query.category_id)
-          return f == query.category_id
+          return f == query.type_id
         })
+      }
+      else{
+        return req.query.genre == query.type_id
+      }
       }) 
     } else {
       result3 = result2
@@ -290,9 +296,16 @@ router.get("/search", async (req, res) => {
     // console.log(result3)
     if (req.query.category) {
       result4 = result3.filter((query) => {
-        return req.query.category.some((f) => {
-          return f == query.type_id
-        })
+        if(Array.isArray(req.query.category))
+        {
+          return req.query.category.some((f) => {
+            return f == query.category_id
+          })
+        }
+        else{
+          return req.query.category==query.category_id
+        }
+       
       }) 
     } else {
       result4 = result3
