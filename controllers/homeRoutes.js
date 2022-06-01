@@ -2,7 +2,7 @@ const router = require("express").Router();
 const sequelize = require('../config/connection');
 const withAuth = require("../utils/auth");
 const multer = require("multer");
-const fs = require("fs");
+const { promises: fs } = require("fs");
 const im = require("imagemagick");
 var path = require("path");
 const pdfConverter = require("pdf-poppler");
@@ -22,7 +22,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-function convertImage(pdfPath,imgpath,page) {
+const convertImage=async (pdfPath,imgpath,page)=> {
   let option = {
     format: "jpeg",
     out_dir: imgpath,
@@ -31,7 +31,7 @@ function convertImage(pdfPath,imgpath,page) {
   };
   // option.out_dir value is the path where the image will be saved
 
-  pdfConverter
+  await pdfConverter
     .convert(pdfPath, option)
     .then(() => {
       console.log("file converted");
@@ -51,26 +51,29 @@ var resultHandler = function(err) {
 const loadTempPdfImages=async (source_file) =>{
   var img_list=[];
   try {
-    const files = await fs.readdirSync(path_temp);
+    const files = await fs.readdir(path_temp);
     if(files)
     {
       const unlinkPromises =await files.map(filename => fs.unlink(`${path_temp}/${filename}`,resultHandler));
       await Promise.all(unlinkPromises);
     }
     await convertImage(path.join(path_pdf,source_file),path_temp,null)
-    const files_new = await fs.readdirSync(path_temp);
-   
-   
-    let count=0;
+    await fs.readdir(path_temp).then((files_new)=>{
+      let count=0;
       //listing all files using forEach
-      await files_new.forEach(function (file) {
+      files_new.forEach(function (file) {
       count=count+1;
         if(count<5)
         {
           img_list.push(file);
         }
        
-      });
+    });
+
+    });
+  
+   
+   
   
 
   } catch(err) {
