@@ -116,7 +116,7 @@ main {
 .hero {
   height: calc(100vh - 100px);
   /* background: #3c3c43; */
-  padding: 50px 0;
+  /* padding: 50px 0; */
 }
 
 .hero-content {
@@ -227,7 +227,7 @@ h3 {
   background: var(--light-bg);
 }
 
-.read-btn {
+.read-btn, .toggle-filters {
   background: none;
   border-radius: 5px;
   border: 1px var(--light-accent) solid;
@@ -237,7 +237,7 @@ h3 {
   text-decoration: none;
 }
 
-.read-btn:hover {
+.read-btn:hover, .toggle-filters:hover {
   background: var(--light-bg);
 }
 
@@ -317,7 +317,6 @@ footer {
 }
 
 .profile {
-  padding: 50px 0;
   width: 100%;
   flex-wrap: wrap;
 }
@@ -514,6 +513,12 @@ footer {
   padding: 0;
 }
 
+.toggle-filters {
+  margin: 10px 0;
+  width: 200px;
+  display: none;
+}
+
 /* Menu */
 .h-menu {
   position: fixed;
@@ -573,6 +578,19 @@ footer {
   }
   .search-card {
     width:50%;
+  }
+  .filters-wrapper {
+    position: relative;
+    left: 0;
+    width: 80%;
+    display: none;
+  }
+  .search-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .toggle-filters {
+    display: block;
   }
 }
 

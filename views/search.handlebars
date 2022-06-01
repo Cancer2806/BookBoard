@@ -1,5 +1,5 @@
 <div class="search-wrapper">
-    
+    <button class="toggle-filters">Toggle Advanced Search</button>
     <aside class="filters-wrapper">
         <div class="content-header flex">
             <div class="header-title">
@@ -9,7 +9,7 @@
         <div class="content-body">
         <form action="" class="filters-form">
             <label class="form-label" for="title">Book Title:</label>
-            <input type="text" name="title"">
+            <input type="text" name="title">
             <br>
             <label class="form-label" for="author">Author Name:</label>
             <input type="text" name="author">
@@ -17,23 +17,17 @@
             <label class="form-label" for="genre">Genre:</label>
             <br>
             <select class="search-select" name="genre" class="form-in" multiple>
-                <option selected value="sci-fi">Sci-Fi</option>
-                <option selected value="romance">Romance</option>
-                <option selected value="fantasy">Fantasy</option>
-                <option selected value="sci-fi">Sci-Fi</option>
-                <option selected value="romance">Romance</option>
-                <option selected value="fantasy">Fantasy</option>
+              {{#each category}}
+                <option selected value="{{this.id}}">{{this.category_name}}</option>
+              {{/each}}
             </select>
             <br>
             <label class="form-label" for="category">Category:</label>
             <br>
             <select class="search-select" name="category" class="form-in" multiple>
-                <option selected value="sci-fi">Zine</option>
-                <option selected value="romance">eBook</option>
-                <option selected value="fantasy">Comic</option>
-                <option selected value="sci-fi">Court Doc</option>
-                <option selected value="romance">Misc</option>
-                <option selected value="fantasy">Certificate</option>
+              {{#each doc_type}}
+                <option selected value="{{this.id}}">{{this.type_name}}</option>
+              {{/each}}
             </select>
             <br>
             <label class="form-label" for="free">Free:</label>
@@ -48,188 +42,13 @@
     </aside>
 
     <section class="search-results">
-        <div class="search-card">
-
-            <div class="search-col-img">
-                <div class="search-cover">
-                    <img src="placeholder.jpg" alt="image" class="search-thumb">
-                </div>
-            </div>
-            <div class="search-col-body">
-                <div class="search-box">
-                    <div class="search-header flex">
-                      <div class="header-title">
-                        <h3>Placeholder Title</h3> 
-                        <p class="italic">$10 <span>• (122pp)</span></p> 
-                      </div>
-                    </div>
-                    <div class="search-body">
-                        <div class="search-desc">
-                            <p>This is an example description of the book, in question.</p>
-                        </div>
-                        <div class="search-links">
-
-                            <div class="search-nav">
-                                <a href="/" class="read-btn">Read</a>            
-                            </div>
-                        </div>
-                    </div>
-            </div>  
-        </div>
-
-        </div>
-        <div class="search-card">
-
-            <div class="search-col-img">
-                <div class="search-cover">
-                    <img src="placeholder.jpg" alt="image" class="search-thumb">
-                </div>
-            </div>
-            <div class="search-col-body">
-                <div class="search-box">
-                    <div class="search-header flex">
-                      <div class="header-title">
-                        <h3>Placeholder Title</h3> 
-                        <p class="italic">$10 <span>• (122pp)</span></p> 
-                      </div>
-                    </div>
-                    <div class="search-body">
-                        <div class="search-desc">
-                            <p>This is an example description of the book, in question.</p>
-                        </div>
-                        <div class="search-links">
-
-                            <div class="search-nav">
-                                <a href="/" class="read-btn">Read</a>            
-                            </div>
-                        </div>
-                    </div>
-            </div>  
-        </div>
-
-        </div>
-        <div class="search-card">
-
-            <div class="search-col-img">
-                <div class="search-cover">
-                    <img src="placeholder.jpg" alt="image" class="search-thumb">
-                </div>
-            </div>
-            <div class="search-col-body">
-                <div class="search-box">
-                    <div class="search-header flex">
-                      <div class="header-title">
-                        <h3>Placeholder Title</h3> 
-                        <p class="italic">$10 <span>• (122pp)</span></p> 
-                      </div>
-                    </div>
-                    <div class="search-body">
-                        <div class="search-desc">
-                            <p>This is an example description of the book, in question.</p>
-                        </div>
-                        <div class="search-links">
-
-                            <div class="search-nav">
-                                <a href="/" class="read-btn">Read</a>            
-                            </div>
-                        </div>
-                    </div>
-            </div>  
-        </div>
-
-        </div>
-        <div class="search-card">
-
-            <div class="search-col-img">
-                <div class="search-cover">
-                    <img src="placeholder.jpg" alt="image" class="search-thumb">
-                </div>
-            </div>
-            <div class="search-col-body">
-                <div class="search-box">
-                    <div class="search-header flex">
-                      <div class="header-title">
-                        <h3>Placeholder Title</h3> 
-                        <p class="italic">$10 <span>• (122pp)</span></p> 
-                      </div>
-                    </div>
-                    <div class="search-body">
-                        <div class="search-desc">
-                            <p>This is an example description of the book, in question.</p>
-                        </div>
-                        <div class="search-links">
-
-                            <div class="search-nav">
-                                <a href="/" class="read-btn">Read</a>            
-                            </div>
-                        </div>
-                    </div>
-            </div>  
-        </div>
-
-        </div>
-        <div class="search-card">
-
-            <div class="search-col-img">
-                <div class="search-cover">
-                    <img src="placeholder.jpg" alt="image" class="search-thumb">
-                </div>
-            </div>
-            <div class="search-col-body">
-                <div class="search-box">
-                    <div class="search-header flex">
-                      <div class="header-title">
-                        <h3>Placeholder Title</h3> 
-                        <p class="italic">$10 <span>• (122pp)</span></p> 
-                      </div>
-                    </div>
-                    <div class="search-body">
-                        <div class="search-desc">
-                            <p>This is an example description of the book, in question.</p>
-                        </div>
-                        <div class="search-links">
-
-                            <div class="search-nav">
-                                <a href="/" class="read-btn">Read</a>            
-                            </div>
-                        </div>
-                    </div>
-            </div>  
-        </div>
-
-        </div>
-        <div class="search-card">
-
-            <div class="search-col-img">
-                <div class="search-cover">
-                    <img src="placeholder.jpg" alt="image" class="search-thumb">
-                </div>
-            </div>
-            <div class="search-col-body">
-                <div class="search-box">
-                    <div class="search-header flex">
-                      <div class="header-title">
-                        <h3>Placeholder Title</h3> 
-                        <p class="italic">$10 <span>• (122pp)</span></p> 
-                      </div>
-                    </div>
-                    <div class="search-body">
-                        <div class="search-desc">
-                            <p>This is an example description of the book, in question.</p>
-                        </div>
-                        <div class="search-links">
-
-                            <div class="search-nav">
-                                <a href="/" class="read-btn">Read</a>            
-                            </div>
-                        </div>
-                    </div>
-            </div>  
-        </div>
-
-        </div>
+      {{#each search_query}}
+        {{> search-results}}
+      {{/each}}
         
     </section>
+
+    <script src="/js/search.js"></script>
 </div>
 
 

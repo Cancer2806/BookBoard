@@ -168,6 +168,98 @@ router.get("/register", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get("/search", async (req, res) => {
+  try {
+    const doc_type = await getDocumentType();
+    const category = await getDocumentCategory();
+    // console.log(req.query)
+
+    const searchQuery = await Files.findAll({
+      include: [        
+      {
+        model: Users,
+        attributes: ["first_name", "last_name"],
+      },]
+    })
+    const userSearch = searchQuery.map((search) => search.get({plain: true}));
+    // console.log(userSearch[8].author)
+    // console.log(req.query.author)
+    let result = [];
+    let result2 = [];
+    let result3 = [];
+    let result4 = [];
+    let result5 = [];
+    let result6 = [];
+    
+    if (req.query.title) {
+      result = userSearch.filter(query => query.title == req.query.title)
+    } else {
+      result = userSearch
+    }
+    // console.log(result)
+    if (req.query.author) {
+      result2 = result.filter(query => req.query.author  == `${query.user.first_name} ${query.user.last_name}`) 
+    } else {
+      result2 = result;
+    }
+    console.log("\n__________________________\n")
+    console.log(result2)
+    console.log("\n__________________________\n")
+    if (req.query.genre) {
+      result3 = result2.filter((query) => {
+        // query.category_id === req.query.genre
+        return req.query.genre.some((f) => {
+          // console.log(f)
+          // console.log("\n__________________________\n")
+          // console.log(query.category_id)
+          return f == query.category_id
+        })
+      }) 
+    } else {
+      result3 = result2
+    }
+    // console.log(result3)
+    if (req.query.category) {
+      result4 = result3.filter((query) => {
+        return req.query.category.some((f) => {
+          return f == query.type_id
+        })
+      }) 
+    } else {
+      result4 = result3
+    }
+    if (req.query.free == "on") {
+      result5 = result4.filter(query => query.price == "0.00") 
+    } else {
+      result5 = result4;
+    }
+    if (req.query.descending == "on") {
+      result6 = result5.reverse()
+    } else {
+      result6 = result5;
+    }
+    // console.log(result)
+    let search_query = result6
+
+
+    // {
+    //   title: 'book-title',
+    //   author: 'authorname',
+    //   genre: [ '1', '2', '3', '4' ],
+    //   category: [ '1', '2', '3' ],
+    //   free: 'on',
+    //   descending: 'on'
+    // }
+
+    res.render("search", { category, doc_type, search_query });
+    // res.json(search_query)
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 router.get("/file/:id", async (req, res) => {
   try {
 
