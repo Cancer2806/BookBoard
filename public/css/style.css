@@ -17,7 +17,7 @@ p {
 
 body {
   font-family: -apple-system, "Helvetica", sans-serif;
-  font-size: 1vw;
+  font-size: 13px;
 }
 
 header {
@@ -114,9 +114,9 @@ main {
 }
 
 .hero {
-  /* height: calc(100vh - 100px); */
+  height: calc(100vh - 100px);
   /* background: #3c3c43; */
-  padding: 50px 0;
+  /* padding: 50px 0; */
 }
 
 .hero-content {
@@ -182,13 +182,11 @@ main {
 
 h3 {
   font-weight:normal;
-  font-size: 1.1vw;
 }
 
 .italic {
   font-style: italic; 
   font-weight: 50;
-  font-size: 1.1vw;
 }
 
 .header-cover {
@@ -229,7 +227,7 @@ h3 {
   background: var(--light-bg);
 }
 
-.read-btn {
+.read-btn, .toggle-filters {
   background: none;
   border-radius: 5px;
   border: 1px var(--light-accent) solid;
@@ -239,7 +237,7 @@ h3 {
   text-decoration: none;
 }
 
-.read-btn:hover {
+.read-btn:hover, .toggle-filters:hover {
   background: var(--light-bg);
 }
 
@@ -249,8 +247,6 @@ h2 {
   margin: 0px 0 10px 0;
   font-weight: bold;
   padding-left: 15px;
-  font-family:'Courier New', Courier, monospace;
-  
 }
 
 .popular-btn, .recent-btn {
@@ -276,7 +272,7 @@ h2 {
 }
 
 .hero-img {
-  height: 150px;
+  height: 90%;
   transition: all 0.25s linear;
   z-index: 0;
 }
@@ -321,7 +317,6 @@ footer {
 }
 
 .profile {
-  padding: 50px 0;
   width: 100%;
   flex-wrap: wrap;
 }
@@ -518,6 +513,12 @@ footer {
   padding: 0;
 }
 
+.toggle-filters {
+  margin: 10px 0;
+  width: 200px;
+  display: none;
+}
+
 /* Menu */
 .h-menu {
   position: fixed;
@@ -578,6 +579,19 @@ footer {
   .search-card {
     width:50%;
   }
+  .filters-wrapper {
+    position: relative;
+    left: 0;
+    width: 80%;
+    display: none;
+  }
+  .search-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .toggle-filters {
+    display: block;
+  }
 }
 
 @media only screen and (max-width: 1080px) {
@@ -614,5 +628,4 @@ footer {
   .content-box {
     width: 100%;
   }
-  
 }
