@@ -3,7 +3,8 @@ const sequelize = require("../config/connection");
 const withAuth = require("../utils/auth");
 const multer = require("multer");
 const { promises: fs } = require("fs");
-const im = require("imagemagick");
+const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.js');
+//const im = require("imagemagick");
 var path = require("path");
 const pdfConverter = require("pdf-poppler");
 const {
@@ -14,7 +15,7 @@ const {
   Reviews,
   Downloads,
 } = require("../models");
-const { sync } = require("../models/Users");
+
 const path_temp = "public/uploads/temp/";
 const path_pdf = "public/uploads/doc/";
 const path_img = "public/uploads/img/";
@@ -30,24 +31,47 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 const convertImage = async (pdfPath, imgpath, page) => {
+  var numPages=0;
+  img_name = path.basename(pdfPath, path.extname(pdfPath));
+  await pdfjsLib.getDocument(pdfPath).promise.then(function (doc) {
+    numPages = doc.numPages;
+    console.log('# Document Loaded');
+    console.log('Number of Pages: ' + numPages);
+  }).catch(err => {
+    console.log('an error has occurred in the pdf converter ' + err)
+  })
+  
   let option = {
     format: "jpeg",
     out_dir: imgpath,
     out_prefix: path.basename(pdfPath, path.extname(pdfPath)),
     page: page,
   };
+
   // option.out_dir value is the path where the image will be saved
-console.log(option);
+//console.log(option);
   await pdfConverter
     .convert(pdfPath, option)
     .then((res) => {
-      console.log(res);
+      //console.log(res);
       console.log("file converted");
     })
     .catch((err) => {
       console.log("an error has occurred in the pdf converter " + err);
     });
-  return path.basename(pdfPath, path.extname(pdfPath));
+   
+    if(numPages<10)
+    {
+      img_name=img_name+"-1.jpg"
+    }
+    else if(numPages<100)
+    {
+      img_name=img_name+"-01.jpg"
+    }
+    else{
+      img_name=img_name+"-001.jpg"
+    }
+  return img_name;
 };
 var resultHandler = function (err) {
   if (err) {
@@ -204,7 +228,7 @@ router.post("/upload", upload.single("source_file"), async (req, res, next) => {
       path_img,
       1
     );
-    img_name = img_name + "-1.jpg";
+  
 
     const fileData = await Files.create({
       title: req.body.title,

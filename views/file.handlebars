@@ -62,11 +62,11 @@
                 <p>Genre: <a href="/search?genre={{fileobj.category_id}}"><span class="file-search">{{fileobj.category.category_name}}</span></a></p>
                 <p>Category: <a href="/search?category={{fileobj.type_id}}"><span class="file-search">{{fileobj.type.type_name}}</span></a></p>
                 </div>
-                <div class="file-buttons">
+              {{#if logged_in}}   <div class="file-buttons">
                   <button class="fvt-btn" data-price="{{fileobj.price}}" id="btnfavourite" data-id="{{fileobj.id}}">Favourite</button>
                   <button class="dl-btn" data-price="{{fileobj.price}}" id="btndownload" href="#" data-id="{{fileobj.id}}" data-url="/uploads/doc/{{fileobj.source_file}}">Download</button>
                   <a class="r-btn" target="_blank" href="/uploads/doc/{{fileobj.source_file}}"> <button>Read</button> </a>
-                </div>
+                </div>  {{/if}}
               </div>
               <div class="file-preview">
                 {{#each preview_img as |img|}}
