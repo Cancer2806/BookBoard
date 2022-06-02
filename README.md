@@ -95,6 +95,8 @@ A user can click on a title that interests them and then be presented with a Pre
 ## Questions
 Please use email for any questions you may have.   
 
-Github:  https://github.com/Cancer2806  https://github.com/th19776675  https://github.com/sreevinithaa  
+Github:  https://github.com/Cancer2806   
+  https://github.com/th19776675  
+  https://github.com/sreevinithaa  
 
 Email:  frank.lavery@westnet.com.au
