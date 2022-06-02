@@ -671,7 +671,7 @@ footer {
 
 .file-card {
   width: 100%;
-  height: 750px;
+  height: 650px;
   display: flex;
   justify-content: end;
 }
@@ -736,6 +736,10 @@ footer {
   text-align: center;
   padding: 5px 10px;
   text-decoration: none;
+}
+
+.file-cover {
+  border: 1px var(--light-accent) solid;
 }
 
 .review-tbl {
@@ -816,6 +820,9 @@ tbody {
   .search-card {
     width:50%;
   }
+  .file-card {
+    width: 100%;
+  }
   .filters-wrapper {
     position: relative;
     left: 0;
@@ -868,10 +875,35 @@ tbody {
   .logo {
     height: 40%;
   }  
+  .outer-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  .img-wrapper {
+    position: relative;
+    display: flex;
+    padding: 0;
+    width: 80%;
+  }
+  .file-col {
+    width:100%;
+  }
+  .download-wrapper {
+    width: 80%;
+  }
 }
 
 @media only screen and (max-width: 480px) {
   .content-box {
+    width: 100%;
+  }
+  .img-wrapper {
+    width: 100%;
+  }
+  .file-wrapper {
+    width: 100%;
+  }
+  .download-wrapper {
     width: 100%;
   }
 }
