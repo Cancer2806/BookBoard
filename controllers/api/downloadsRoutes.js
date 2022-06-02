@@ -5,7 +5,7 @@ const { Downloads } = require("../../models");
 router.post("/", async (req, res) => {
   try {
     const data = await Downloads.findOne({
-      where: { file_id: req.body.file_id, user_id: 1 },
+      where: { file_id: req.body.file_id, user_id: req.session.user_id },
     });
     if (!data) {
       const downloadData = await Downloads.create({

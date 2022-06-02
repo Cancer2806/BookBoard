@@ -111,11 +111,11 @@ router.get("/", async (req, res) => {
         },
         {
           model: Categories,
-          attributes: ["category_name"],
+          attributes: ["category_name", "id"],
         },
         {
           model: Types,
-          attributes: ["type_name"],
+          attributes: ["type_name", "id"],
         },
       ],
     });
@@ -143,7 +143,7 @@ router.get("/", async (req, res) => {
             },
             {
               model: Categories,
-              attributes: ["category_name"],
+              attributes: ["category_name", "id"],
             },
             {
               model: Types,
@@ -203,18 +203,17 @@ router.post("/upload", upload.single("source_file"), async (req, res, next) => {
       path_img,
       1
     );
-    img_name = img_name + "-1.jpg";
+    new_img = img_name + "-1.jpg";
 
     const fileData = await Files.create({
       title: req.body.title,
       brief_description: req.body.brief_description,
       user_id: req.session.user_id,
       price: req.body.price,
-      cover_art: img_name,
+      cover_art: new_img,
       type_id: req.body.type_id,
       category_id: req.body.category_id,
       source_file: req.file.filename,
-      user_id: 1,
     });
     // console.log(req.file, req.body,req.file.filename,img_name)
     console.log(fileData);
@@ -301,9 +300,9 @@ router.get("/search", async (req, res) => {
     } else {
       result2 = result;
     }
-    console.log("\n__________________________\n");
-    console.log(result2);
-    console.log("\n__________________________\n");
+    // console.log("\n__________________________\n");
+    // console.log(result2);
+    // console.log("\n__________________________\n");
     if (req.query.genre) {
       result3 = result2.filter((query) => {
         if (Array.isArray(req.query.genre)) {
@@ -347,6 +346,9 @@ router.get("/search", async (req, res) => {
     }
     // console.log(result)
     let search_query = result6;
+    if (!search_query) {
+      search_query = []
+    }
 
     // {
     //   title: 'book-title',

@@ -1,7 +1,7 @@
 const reviewFormHandler = async (event) => {
     event.preventDefault();
   
-    const review_content = document.querySelector('#review_content').value.trim();
+    const review_content = document.querySelector('.bio-input').value.trim();
     const rating = document.querySelector('#stars').value.trim();
     const file_id = document.querySelector('#file_id').value.trim();
    
@@ -25,6 +25,6 @@ const reviewFormHandler = async (event) => {
   
  
   document
-    .querySelector('.review-form')
+    .querySelector('.filters-form')
     .addEventListener('submit', reviewFormHandler);
   

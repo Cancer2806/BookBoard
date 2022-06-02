@@ -16,12 +16,13 @@ const downloadHandler = async (event) => {
       });
  
       if (response.ok) {
+        console.log("TEST")
         const a = document.createElement('a')
-a.href = url
-a.download = url.split('/').pop()
-document.body.appendChild(a)
-a.click()
-document.body.removeChild(a)
+        a.href = url
+        a.download = url.split('/').pop()
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
       } else {
         alert(response.statusText);
       }
@@ -58,7 +59,7 @@ document.body.removeChild(a)
   document
     .querySelector('#btndownload')
     .addEventListener('click', downloadHandler);
-    document
+  document
     .querySelector('#btnfavourite')
     .addEventListener('click', favouriteHandler);
     

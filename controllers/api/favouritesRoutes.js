@@ -5,7 +5,7 @@ const { Favourites } = require("../../models");
 router.post("/", async (req, res) => {
   try {
     const odata = await Favourites.findOne({
-      where: { file_id: req.body.file_id, user_id: 1 },
+      where: { file_id: req.body.file_id, user_id: req.session.user_id},
     });
     if (!odata) {
       const data = await Favourites.create({

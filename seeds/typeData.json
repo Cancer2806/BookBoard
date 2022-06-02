@@ -10,5 +10,13 @@
   {
     "type_name": "comic book",
     "type_description": "graphical novel"
+  },
+  {
+    "type_name": "brochure",
+    "type_description": "informative folded format"
+  },
+  {
+    "type_name": "photobook",
+    "type_description": "book containing photos"
   }
 ]
