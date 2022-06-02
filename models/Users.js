@@ -28,6 +28,10 @@ Users.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    user_bio: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
