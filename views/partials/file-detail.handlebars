@@ -2,7 +2,7 @@
   <div class="content-header flex">
     <div class="header-title">
       <h3>{{file.title}}</h3>
-      <p class="italic">${{file.price}} <span>• (122pp)</span></p>
+      <p class="italic">${{file.price}}</p>
     </div>
     <div class="header-cover">
       <img
@@ -15,17 +15,25 @@
 
   <div class="content-body">
     <div class="content-nav">
-      <p class="content-item"><a
-          href="/profile/{{file.user_id}}"
-        >{{file.user.first_name}}
-          {{file.user.last_name}}
-        </a></p>
+      <p class="content-item">
+        <a href="/profile/{{file.user_id}}" class="content-link">
+          {{file.user.first_name}} {{file.user.last_name}}
+        </a>
+      </p>
     </div>
     <div class="content-nav">
-      <p class="content-item">{{file.category.category_name}}</p>
+      <p class="content-item">
+        <a href="/search?genre={{file.category.id}}" class="content-link">
+          {{file.category.category_name}}
+        </a>
+      </p>
     </div>
     <div class="content-nav">
-      <p class="content-item"><span>{{file.type.type_name}}</span></p>
+      <p class="content-item">
+        <a href="/search?category={{file.type.id}}" class="content-link">
+          {{file.type.type_name}}
+        </a>
+      </p>
     </div>
     <div class="content-nav">
       <a href="/file/{{file.id}}" class="read-btn">Read</a>
