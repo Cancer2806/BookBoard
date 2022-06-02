@@ -19,19 +19,16 @@
     <header>
       <div class="header-wrapper flex">
         <div class="logo-sec flex">
-          <h3>Book Board</h3>
-          {{! <img src="#" alt="BookBoard"> }}
+          {{!-- <h3>Book Board</h3> --}}
+         <a href="/" class="logo-wrap flex"><img src="/img/bookboard-logo.svg" alt="BookBoard" class="logo"></a>
         </div>
         <div class="search-sec flex">
           <form action="/search" method="get" class="search-form flex">
-            <input type="text" id="title" name="title" class="search-field" />
+            <input type="text" id="title" name="title" class="search-field" placeholder="Search for book title!" />
             <input type="submit" class="search-submit" value="Search" />
           </form>
         </div>
         <div class="nav-sec">
-          <div class="nav-item flex">
-            <p><a href="/">Home</a></p>
-          </div>
           {{#if logged_in}}
             <div class="nav-item flex">
               <p><a href="/upload">Upload</a></p>
@@ -63,17 +60,26 @@
       <div class="h-menu">
         <form class="search-form flex">
           <input type="text" class="search-field" />
-          <input type="submit" class="search-submit" value="Search" />
+          <input type="submit" class="search-submit" value="Search" placeholder="Search for book title!" />
         </form>
+        {{#if logged_in}}
         <div class="nav-item flex">
           <a href="/upload" class="h-items">Upload</a>
         </div>
+        <div class="nav-item flex">
+          <a href="/profile/{{user_id}}" class="h-items">Profile</a>
+        </div>
+        <div class="nav-item flex">
+          <a href="/logout" class="h-items">Logout</a>
+        </div>
+        {{else}}
         <div class="nav-item flex">
           <a href="/login" class="h-items">Login</a>
         </div>
         <div class="nav-item flex">
           <a href="/register" class="h-items">Register</a>
         </div>
+        {{/if}}
       </div>
     </header>
     <div class="gap"></div>

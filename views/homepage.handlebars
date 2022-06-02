@@ -1,6 +1,6 @@
-  <main>
-    <section class="hero">
-       <h2>Random Collection </h2>
+     <section class="hero">
+       {{!-- <h2>BookBoard's Recommended</h2> --}}
+       <h2 class="hero-text">BookBoard's Random Selection</h2>
       <div class="hero-content">
         {{#each randomDoc as |doc|}}
 {{> file-detail-hero}}
@@ -20,7 +20,7 @@
 {{/each}}
       </div>
       <div class="flex">
-        <a class="popular-btn" href="/search">Browse More</a>
+        <a class="popular-btn flex" href="/search">Browse More</a>
       </div>
 
     </section>
@@ -38,4 +38,3 @@
     </section>
 
 <script src="/js/slider.js"></script>
-  </main>

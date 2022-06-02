@@ -2,30 +2,35 @@
   {
     "first_name": "Sally",
     "last_name": "Monroe",
+    "user_bio": "Hello, I am Sally and I find it amazing to read and discover new thing about the world. Love you Bob.",
     "email":  "sally.monroe@books.com",
     "password":  "password12345"
   },
   {
     "first_name": "Robert",
     "last_name": "The Bruce",
+    "user_bio": "Yo, its Robert. You can call me Bob The Bruce. I Love Women.",
     "email": "scotty@books.com",
     "password": "password12345"
   },
   {
     "first_name": "Mickey",
     "last_name": "Cats",
+    "user_bio": "Cats are so cool. GIve me any feline based book and a I will read it.",
     "email": "mickey@zine.com",
     "password": "password12345"
   },
   {
     "first_name": "Cloudy",
     "last_name": "Day",
+    "user_bio": "I am horribly depressed. My days are numbered. I miss you Sally. I can't believe you left me like that. Oh well...",
     "email": "rains@zine.com",
     "password": "password12345"
   },
   {
     "first_name": "Comic",
     "last_name": "Reader",
+    "user_bio": "I like comic.",
     "email": "comical@zine.com",
     "password": "password12345"
   }
