@@ -43,14 +43,14 @@ A fabulous place for sharing (and selling) original content.  The application al
 <<Still to be completed>>
 Launch Screen:
 <br>
-<img src="./public/images/OpeningScreen.png" width=700 alt = "Launch Screen">  
+<img src="./public/img/Screenshot_Launch.png" width=700 alt = "Launch Screen">  
 This screen lists all active blogs and can be viewed by all visitors to the Site
 
 <br>
 
-Log In Screen:
+Profile Screen:
 <br>
-<img src="./public/images/LogInScreen.png" width=700 alt = "Log In Screen">  
+<img src="./public/img/Screenshot_Profile.png" width=700 alt = "Log In Screen">  
 If a visitor is not logged in, clicking on Dashboard or Log In on the nav bar will take them to this screen.  From here, they can either register, if a new user or log in, if an existing user   
 
 <br>
