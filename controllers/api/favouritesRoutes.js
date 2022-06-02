@@ -15,7 +15,10 @@ router.post("/", async (req, res) => {
       });
       res.status(200).json(data);
     }
-    res.status(200).json(odata);
+    else{
+      res.status(200).json(odata);
+    }
+   
   } catch (err) {
     res.status(400).json(err);
   }
