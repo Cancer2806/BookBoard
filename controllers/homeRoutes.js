@@ -3,7 +3,7 @@ const sequelize = require("../config/connection");
 const withAuth = require("../utils/auth");
 const multer = require("multer");
 const { promises: fs } = require("fs");
-const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.js');
+const pdfjsLib = require("pdfjs-dist/legacy/build/pdf.js");
 //const im = require("imagemagick");
 var path = require("path");
 const pdfConverter = require("pdf-poppler");
@@ -19,6 +19,8 @@ const {
 const path_temp = "public/uploads/temp/";
 const path_pdf = "public/uploads/doc/";
 const path_img = "public/uploads/img/";
+
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path_pdf);
@@ -30,17 +32,21 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-const convertImage = async (pdfPath, imgpath, page) => {
-  var numPages=0;
+//pdf poppler naming pattern
+var convertName = (imgname, noOfPages, page) => {
+  if (noOfPages < 10) {
+    return imgname + "-" + page + ".jpg";
+  } else if (noOfPages < 100) {
+    return imgname + "-0" + page + ".jpg";
+  } else {
+    return imgname + "-00" + page + ".jpg";
+  }
+};
+
+//converting pdf pages to jpg image
+const convertImage = async (pdfPath, imgpath, page, numPages) => {
   img_name = path.basename(pdfPath, path.extname(pdfPath));
-  await pdfjsLib.getDocument(pdfPath).promise.then(function (doc) {
-    numPages = doc.numPages;
-    console.log('# Document Loaded');
-    console.log('Number of Pages: ' + numPages);
-  }).catch(err => {
-    console.log('an error has occurred in the pdf converter ' + err)
-  })
-  
+
   let option = {
     format: "jpeg",
     out_dir: imgpath,
@@ -48,31 +54,21 @@ const convertImage = async (pdfPath, imgpath, page) => {
     page: page,
   };
 
-  // option.out_dir value is the path where the image will be saved
-//console.log(option);
   await pdfConverter
     .convert(pdfPath, option)
     .then((res) => {
-      //console.log(res);
+      
       console.log("file converted");
     })
     .catch((err) => {
       console.log("an error has occurred in the pdf converter " + err);
     });
-   
-    if(numPages<10)
-    {
-      img_name=img_name+"-1.jpg"
-    }
-    else if(numPages<100)
-    {
-      img_name=img_name+"-01.jpg"
-    }
-    else{
-      img_name=img_name+"-001.jpg"
-    }
+
+  img_name = convertName(img_name, numPages, page);
+
   return img_name;
 };
+
 var resultHandler = function (err) {
   if (err) {
     console.log("unlink failed", err);
@@ -80,6 +76,8 @@ var resultHandler = function (err) {
     console.log("file deleted");
   }
 };
+
+//preview image loading
 const loadTempPdfImages = async (source_file) => {
   var img_list = [];
   try {
@@ -90,28 +88,41 @@ const loadTempPdfImages = async (source_file) => {
       );
       await Promise.all(unlinkPromises);
     }
-    await convertImage(path.join(path_pdf, source_file), path_temp, null);
-    await fs.readdir(path_temp).then((files_new) => {
-      let count = 0;
-      //listing all files using forEach
-      files_new.forEach(function (file) {
-        count = count + 1;
-        if (count < 5) {
-          img_list.push(file);
-        }
+    let numPages = 0;
+    await pdfjsLib
+      .getDocument(path.join(path_pdf, source_file))
+      .promise.then(function (doc) {
+        numPages = doc.numPages;
+        console.log("# Document Loaded");
+        console.log("Number of Pages: " + numPages);
+      })
+      .catch((err) => {
+        console.log("an error has occurred in the pdf converter " + err);
       });
-    });
+    for (let i = 1; i < 5; i++) {
+      let file = await convertImage(
+        path.join(path_pdf, source_file),
+        path_temp,
+        i,
+        numPages
+      );
+
+      img_list.push(file);
+    }
   } catch (err) {
     console.log(err);
   }
   return img_list;
 };
+
+//get document category method
 const getDocumentCategory = async () => {
   const data1 = await Categories.findAll();
   const category = data1.map((data) => data.get({ plain: true }));
   return category;
 };
 
+//get document type method
 const getDocumentType = async () => {
   const data2 = await Types.findAll();
   const doc_type = data2.map((data) => data.get({ plain: true }));
@@ -119,13 +130,17 @@ const getDocumentType = async () => {
   return doc_type;
 };
 
+//landing page route
 router.get("/", async (req, res) => {
   try {
+
+    //Loading random collection
     const docs = await Files.findAll({
       limit: 8,
       order: [[sequelize.literal("RAND()")]],
     });
 
+      //loading latest 4 in recently added files
     const docs1 = await Files.findAll({
       limit: 4,
       order: [["id", "DESC"]],
@@ -144,6 +159,8 @@ router.get("/", async (req, res) => {
         },
       ],
     });
+
+    //most downloadded once under popular
     const docs2 = await Downloads.findAll({
       limit: 4,
       group: ["file_id"],
@@ -196,7 +213,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/upload", withAuth,async (req, res) => {
+//upload route call
+router.get("/upload", withAuth, async (req, res) => {
   try {
     const doc_type = await getDocumentType();
     const category = await getDocumentCategory();
@@ -210,6 +228,8 @@ router.get("/upload", withAuth,async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+//add review route
 router.get("/addreview/:id", async (req, res) => {
   try {
     res.render("addReview", {
@@ -221,14 +241,27 @@ router.get("/addreview/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+//upload post method
 router.post("/upload", upload.single("source_file"), async (req, res, next) => {
   try {
+    let numPages = 0;
+    await pdfjsLib
+      .getDocument(path.join(req.file.destination, req.file.filename))
+      .promise.then(function (doc) {
+        numPages = doc.numPages;
+        console.log("# Document Loaded");
+        console.log("Number of Pages: " + numPages);
+      })
+      .catch((err) => {
+        console.log("an error has occurred in the pdf converter " + err);
+      });
     var img_name = await convertImage(
       path.join(req.file.destination, req.file.filename),
       path_img,
-      1
+      1,
+      numPages
     );
-  
 
     const fileData = await Files.create({
       title: req.body.title,
@@ -238,8 +271,7 @@ router.post("/upload", upload.single("source_file"), async (req, res, next) => {
       cover_art: img_name,
       type_id: req.body.type_id,
       category_id: req.body.category_id,
-      source_file: req.file.filename
-     
+      source_file: req.file.filename,
     });
     // console.log(req.file, req.body,req.file.filename,img_name)
     console.log(fileData);
@@ -249,6 +281,7 @@ router.post("/upload", upload.single("source_file"), async (req, res, next) => {
   }
 });
 
+//login page route
 router.get("/login", async (req, res) => {
   try {
     res.render("userLogin", {
@@ -260,6 +293,7 @@ router.get("/login", async (req, res) => {
   }
 });
 
+//profile page load
 router.get("/profile/:id", withAuth, async (req, res) => {
   try {
     const userData = await Users.findByPk(req.params.id, {
@@ -280,6 +314,7 @@ router.get("/profile/:id", withAuth, async (req, res) => {
   }
 });
 
+//register page load
 router.get("/register", async (req, res) => {
   try {
     res.render("signUp", {
@@ -291,6 +326,7 @@ router.get("/register", async (req, res) => {
   }
 });
 
+//search page route
 router.get("/search", async (req, res) => {
   try {
     const doc_type = await getDocumentType();
@@ -312,12 +348,14 @@ router.get("/search", async (req, res) => {
     let result5 = [];
     let result6 = [];
 
+    //filtering based on title
     if (req.query.title) {
       result = userSearch.filter((query) => query.title == req.query.title);
     } else {
       result = userSearch;
     }
-    // console.log(result)
+    
+    //filtering based on author
     if (req.query.author) {
       result2 = result.filter(
         (query) =>
@@ -326,17 +364,11 @@ router.get("/search", async (req, res) => {
     } else {
       result2 = result;
     }
-    console.log("\n__________________________\n");
-    console.log(result2);
-    console.log("\n__________________________\n");
+   //filtering based on genre
     if (req.query.genre) {
       result3 = result2.filter((query) => {
         if (Array.isArray(req.query.genre)) {
-          // query.category_id === req.query.genre
-          return req.query.genre.some((f) => {
-            // console.log(f)
-            // console.log("\n__________________________\n")
-            // console.log(query.category_id)
+         return req.query.genre.some((f) => {
             return f == query.type_id;
           });
         } else {
@@ -346,7 +378,7 @@ router.get("/search", async (req, res) => {
     } else {
       result3 = result2;
     }
-    // console.log(result3)
+    //filtering based on category
     if (req.query.category) {
       result4 = result3.filter((query) => {
         if (Array.isArray(req.query.category)) {
@@ -370,17 +402,10 @@ router.get("/search", async (req, res) => {
     } else {
       result6 = result5;
     }
-    // console.log(result)
+   
     let search_query = result6;
 
-    // {
-    //   title: 'book-title',
-    //   author: 'authorname',
-    //   genre: [ '1', '2', '3', '4' ],
-    //   category: [ '1', '2', '3' ],
-    //   free: 'on',
-    //   descending: 'on'
-    // }
+   
 
     res.render("search", {
       category,
@@ -389,12 +414,13 @@ router.get("/search", async (req, res) => {
       logged_in: req.session.logged_in,
       user_id: req.session.user_id,
     });
-    // res.json(search_query)
+   
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
+//load file route
 router.get("/file/:id", async (req, res) => {
   try {
     const data = await Files.findByPk(req.params.id, {
