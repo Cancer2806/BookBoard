@@ -1,47 +1,18 @@
-{{!-- 
-    {{#if logged_in}}
-        
-     <div class="right-section">
-    <a class="btnlink" data-price="{{fileobj.price}}" id="btnfavourite" data-id="{{fileobj.id}}" href="#"   >Favourite</a>
-    <a class="btnlink" data-price="{{fileobj.price}}" id="btndownload" href="#" data-id="{{fileobj.id}}" data-url="/uploads/doc/{{fileobj.source_file}}" >Download</a>
-    <a class="btnlink" target="_blank" href="/uploads/doc/{{fileobj.source_file}}">Read</a></div> {{/if}}
-     <div class="column">
-
-  <div class="row">
-    <div class="column">
-      <div ><img class="largeImg" src="/uploads/img/{{fileobj.cover_art}}" /></div>
-      <div class="row">
-        <div class="header">{{fileobj.title}}</div>
-        <div class="description"><strong>Description : </strong><br><br>{{fileobj.brief_description}}</div>
-        <div class="content-text">Author : {{fileobj.user.first_name}} {{fileobj.user.last_name}}</div>
-         <div class="content-text">Category : {{fileobj.category.category_name}}</div>
-          <div class="content-text">Document Type : {{fileobj.type.type_name}}</div>
-      </div>
-      
-    </div>
-    <div class="review">{{> file-preview }}</div>
-    <div class="review">{{> review-detail}}</div> 
-  </div>
-  <div class="width40">{{> download-detail}}</div>
-
-</div> --}}
-
 <div class="outer-wrapper">
   <div class="img-wrapper">
-  <div class="search-col-img file-img">
-    <div class="search-cover file-cover">
-      <img
+    <div class="search-col-img file-img">
+      <div class="search-cover file-cover">
+        <img
         src="/uploads/img/{{fileobj.cover_art}}"
         alt="image"
         class="file-thumb"
-      />
+        />
+      </div>
     </div>
-  </div>
   </div>
   <section class="file-wrapper">
     <div class="file-info">
       <div class="search-card file-card ">
-
         <div class="search-col-body file-col">
           <div class="search-box file-flex">
             <div class="search-header flex">
@@ -58,15 +29,17 @@
                   </div>
                 </div>
                 <div class="file-tech">
-                <p>Author: <a href="/profile/{{fileobj.user_id}}"><span class="file-search">{{fileobj.user.first_name}} {{fileobj.user.last_name}}</span></a></p>
-                <p>Genre: <a href="/search?genre={{fileobj.category_id}}"><span class="file-search">{{fileobj.category.category_name}}</span></a></p>
-                <p>Category: <a href="/search?category={{fileobj.type_id}}"><span class="file-search">{{fileobj.type.type_name}}</span></a></p>
+                  <p>Author: <a href="/profile/{{fileobj.user_id}}"><span class="file-search">{{fileobj.user.first_name}} {{fileobj.user.last_name}}</span></a></p>
+                  <p>Genre: <a href="/search?genre={{fileobj.category_id}}"><span class="file-search">{{fileobj.category.category_name}}</span></a></p>
+                  <p>Category: <a href="/search?category={{fileobj.type_id}}"><span class="file-search">{{fileobj.type.type_name}}</span></a></p>
                 </div>
-              {{#if logged_in}}   <div class="file-buttons">
+                {{#if logged_in}}   
+                  <div class="file-buttons">
                   <button class="fvt-btn" data-price="{{fileobj.price}}" id="btnfavourite" data-id="{{fileobj.id}}">Favourite</button>
                   <button class="dl-btn" data-price="{{fileobj.price}}" id="btndownload" href="#" data-id="{{fileobj.id}}" data-url="/uploads/doc/{{fileobj.source_file}}">Download</button>
                   <a class="r-btn" target="_blank" href="/uploads/doc/{{fileobj.source_file}}"> <button>Read</button> </a>
-                </div>  {{/if}}
+                  </div>
+                {{/if}}
               </div>
               <div class="file-preview">
                 {{#each preview_img as |img|}}
@@ -76,35 +49,35 @@
                 {{/each}}
               </div>
               <div class="file-review">
-
-              <table class="review-tbl">
+                <table class="review-tbl">
                 <tr><th>User</th><th>Comment
-              {{#if logged_in}}<div class="right-section">
+                {{#if logged_in}}<div class="right-section">
                   <a href="/addreview/{{fileobj.id}}" class="file-comment">Add Comment</a></div>
-              {{/if}}
+                {{/if}}
                 </th></tr>
                 {{#each fileobj.reviews as |item|}}
                   <tr><td>{{item.user.first_name}}</td><td>{{item.review_content}}</td></tr>
                 {{/each}}
                 <tr></tr>
-              </table>
+                </table>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </section>
+
   <aside class="download-wrapper">
     <table class="review-tbl">
-  <tr><th>User</th><th>Price</th><th>Date</th></tr>
-  {{#each fileobj.downloads as |item|}}
-    <tr><td>{{item.user.first_name}}</td><td>${{item.price}}</td><td
-      >{{item.created_at}}</td></tr>
-  {{/each}}
-  <tr></tr>
+      <tr><th>User</th><th>Price</th><th>Date</th></tr>
+      {{#each fileobj.downloads as |item|}}
+      <tr><td>{{item.user.first_name}}</td><td>${{item.price}}</td>
+      <td>{{item.created_at}}</td></tr>
+      {{/each}}
+      <tr></tr>
     </table>
   </aside>
 </div>
+
 <script src="../js/files.js"></script>

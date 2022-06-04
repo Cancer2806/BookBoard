@@ -1,40 +1,31 @@
-     <section class="hero">
-       {{!-- <h2>BookBoard's Recommended</h2> --}}
-       <h2 class="hero-text">BookBoard's Random Selection</h2>
-      <div class="hero-content">
-        {{#each randomDoc as |doc|}}
-{{> file-detail-hero}}
-{{/each}}
-       
-      
-      </div>
-    </section>
+<section class="hero">
+  <h2 class="hero-text">BookBoard's Random Selection</h2>
+  <div class="hero-content">
+    {{#each randomDoc as |doc|}}
+      {{> file-detail-hero}}
+    {{/each}}
+  </div>
+</section>
 
-    <section class="popular">
-      <h2>Popular All Time</h2>
+<section class="popular">
+  <h2>Popular All Time</h2>
+  <div class="popular-content flex">
+    {{#each popularDoc as |doc|}}
+      {{> file-detail}}
+    {{/each}}
+  </div>
+  <div class="flex">
+    <a class="popular-btn flex" href="/search">Browse More</a>
+  </div>
+</section>
 
-      <div class="popular-content flex">
-      
-        {{#each popularDoc as |doc|}}
-{{> file-detail}}
-{{/each}}
-      </div>
-      <div class="flex">
-        <a class="popular-btn flex" href="/search">Browse More</a>
-      </div>
-
-    </section>
-
-    <section class="recent">
-      <h2>Recently Uploaded</h2>
-
-      <div class="recent-content">
-
-        {{#each latestdoc as |doc|}}
-{{> file-detail-latest}}
-{{/each}}
-      </div>
-
-    </section>
+<section class="recent">
+  <h2>Recently Uploaded</h2>
+  <div class="recent-content">
+    {{#each latestdoc as |doc|}}
+      {{> file-detail-latest}}
+    {{/each}}
+  </div>
+</section>
 
 <script src="/js/slider.js"></script>

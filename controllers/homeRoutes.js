@@ -160,7 +160,7 @@ router.get('/', async (req, res) => {
       ],
     });
 
-    //most downloadded once under popular
+    //most downloaded once under popular
     const docs2 = await Downloads.findAll({
       limit: 4,
       group: ['file_id'],

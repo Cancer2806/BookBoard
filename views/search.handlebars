@@ -1,54 +1,51 @@
 <div class="search-wrapper">
-    <button class="toggle-filters">Toggle Advanced Search</button>
-    <aside class="filters-wrapper">
-        <div class="content-header flex">
-            <div class="header-title">
-                  <h3>Advanced Search</h3>
-            </div>
-        </div>
-        <div class="content-body">
-        <form action="" class="filters-form">
-            <label class="form-label" for="title">Book Title:</label>
-            <input type="text" name="title">
-            <br>
-            <label class="form-label" for="author">Author Name:</label>
-            <input type="text" name="author">
-            <br>
-            <label class="form-label" for="genre">Genre:</label>
-            <br>
-            <select class="search-select" name="genre" class="form-in" multiple>
-              {{#each category}}
-                <option selected value="{{this.id}}">{{this.category_name}}</option>
-              {{/each}}
-            </select>
-            <br>
-            <label class="form-label" for="category">Category:</label>
-            <br>
-            <select class="search-select" name="category" class="form-in" multiple>
-              {{#each doc_type}}
-                <option selected value="{{this.id}}">{{this.type_name}}</option>
-              {{/each}}
-            </select>
-            <br>
-            <label class="form-label" for="free">Free:</label>
-            <input type="checkbox" name="free" class="form-in checkbox">
-            <br>
-            <label class="form-label" for="descending">Sort By Descending:</label>
-            <input type="checkbox" name="descending" class="form-in checkbox">
-            <br>
-            <input type="submit" value="Search" class="filters-btn">
-        </form>
+  <button class="toggle-filters">Toggle Advanced Search</button>
+  <aside class="filters-wrapper">
+    <div class="content-header flex">
+      <div class="header-title">
+        <h3>Advanced Search</h3>
+      </div>
     </div>
-    </aside>
+    <div class="content-body">
+      <form action="" class="filters-form">
+        <label class="form-label" for="title">Book Title:</label>
+        <input type="text" name="title">
+        <br>
+        <label class="form-label" for="author">Author Name:</label>
+        <input type="text" name="author">
+        <br>
+        <label class="form-label" for="genre">Genre:</label>
+        <br>
+        <select class="search-select" name="genre" class="form-in" multiple>
+          {{#each category}}
+            <option selected value="{{this.id}}">{{this.category_name}}</option>
+          {{/each}}
+        </select>
+        <br>
+        <label class="form-label" for="category">Category:</label>
+        <br>
+        <select class="search-select" name="category" class="form-in" multiple>
+          {{#each doc_type}}
+            <option selected value="{{this.id}}">{{this.type_name}}</option>
+          {{/each}}
+        </select>
+        <br>
+        <label class="form-label" for="free">Free:</label>
+        <input type="checkbox" name="free" class="form-in checkbox">
+        <br>
+        <label class="form-label" for="descending">Sort By Descending:</label>
+        <input type="checkbox" name="descending" class="form-in checkbox">
+        <br>
+        <input type="submit" value="Search" class="filters-btn">
+      </form>
+    </div>
+  </aside>
 
-    <section class="search-results">
-      {{#each search_query}}
-        {{> search-results}}
-      {{/each}}
-        
-    </section>
-
-    <script src="/js/search.js"></script>
+  <section class="search-results">
+    {{#each search_query}}
+      {{> search-results}}
+    {{/each}}
+  </section>
+  
+  <script src="/js/search.js"></script>
 </div>
-
-

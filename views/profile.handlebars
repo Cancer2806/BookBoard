@@ -1,61 +1,59 @@
 <section class="profile flex">
+  <div class="account-box account">
+    <div class="content-header flex">
+      <div class="header-title">
+        <h3>{{user.first_name}} {{user.last_name}}</h3> 
+        <p class="italic">{{user.email}}</p> 
+      </div>
+    </div>
+    <div class="content-desc">
+      <div class="content-nav">
+        <p>{{user.user_bio}}</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="account-box stats">
+    <div class="content-header flex ">
+      <div class="header-title">
+        <h3>Stats</h3> 
+      </div>
+    </div>
+    <div class="content-desc">
+      <div class="stats-content">
+        <p>Profit: ${{ get_profit_total user.files}}</p>
+        <p>Downloads: {{get_downloads_total user.files}}</p>
+        <p>Average Rating: {{get_rating_average user.files}}/5</p>
+      </div>
+    </div>
+  </div>
 
-        <div class="account-box account">
-            <div class="content-header flex">
-              <div class="header-title">
-                <h3>{{user.first_name}} {{user.last_name}}</h3> 
-                <p class="italic">{{user.email}}</p> 
-              </div>
-            </div>
-            <div class="content-desc">
-              <div class="content-nav">
-                <p>{{user.user_bio}}</p>
-              </div>
-            </div>
-        </div>
-        
-        <div class="account-box stats">
-            <div class="content-header flex ">
-              <div class="header-title">
-                <h3>Stats</h3> 
-              </div>
-            </div>
-            <div class="content-desc">
-              <div class="stats-content">
-                <p>Profit: ${{ get_profit_total user.files}}</p>
-                <p>Downloads: {{get_downloads_total user.files}}</p>
-                <p>Average Rating: {{get_rating_average user.files}}/5</p>
-              </div>
-            </div>
-        </div>
-
-        <div class="account-box collection">
-            <div class="content-header flex ">
-              <div class="header-title">
-                <h3>Uploaded Books</h3> 
-              </div>
-            </div>
-            <div class="content-desc">
-              <div class="content-row">
-                {{#each user.files as |file|}}
-                  {{> image-row}}
-                {{/each}}
-              </div>
-            </div>
-        </div>
-        <div class="account-box collection">
-            <div class="content-header flex ">
-              <div class="header-title">
-                <h3>Favourited Books</h3> 
-              </div>
-            </div>
-            <div class="content-desc">
-              <div class="content-row">
-                {{#each user.favourites as |favourite|}}
-                  {{> upload-row}}
-                {{/each}}
-              </div>
-            </div>
-        </div>    
-
-    </section>
+  <div class="account-box collection">
+    <div class="content-header flex ">
+      <div class="header-title">
+        <h3>Uploaded Books</h3> 
+      </div>
+    </div>
+    <div class="content-desc">
+      <div class="content-row">
+        {{#each user.files as |file|}}
+          {{> image-row}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+  <div class="account-box collection">
+    <div class="content-header flex ">
+      <div class="header-title">
+          <h3>Favourited Books</h3> 
+      </div>
+    </div>
+    <div class="content-desc">
+      <div class="content-row">
+        {{#each user.favourites as |favourite|}}
+          {{> upload-row}}
+        {{/each}}
+      </div>
+    </div>
+  </div>    
+</section>
