@@ -9,9 +9,6 @@
     "seed": "node seeds/seed.js",
     "watch": "nodemon server.js"
   },
-  "engines": {
-    "node": "16.14.2"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
