@@ -12,6 +12,7 @@
   "engines": {
     "node": "16.14.2"
   },
+  "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
   "keywords": [],
   "author": "",
   "license": "ISC",
