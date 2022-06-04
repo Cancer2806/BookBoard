@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
 const withAuth = require("../utils/auth");
-const multer = require("multer");
+// const multer = require("multer");
 const { promises: fs } = require("fs");
 const pdfjsLib = require("pdfjs-dist/legacy/build/pdf.js");
 //const im = require("imagemagick");
@@ -21,27 +21,27 @@ const path_pdf = "public/uploads/doc/";
 const path_img = "public/uploads/img/";
 
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path_pdf);
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
-  },
-});
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, path_pdf);
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
+//   },
+// });
 
-var upload = multer({ storage: storage });
+// var upload = multer({ storage: storage });
 
-//pdf poppler naming pattern
-var convertName = (imgname, noOfPages, page) => {
-  if (noOfPages < 10) {
-    return imgname + "-" + page + ".jpg";
-  } else if (noOfPages < 100) {
-    return imgname + "-0" + page + ".jpg";
-  } else {
-    return imgname + "-00" + page + ".jpg";
-  }
-};
+// //pdf poppler naming pattern
+// var convertName = (imgname, noOfPages, page) => {
+//   if (noOfPages < 10) {
+//     return imgname + "-" + page + ".jpg";
+//   } else if (noOfPages < 100) {
+//     return imgname + "-0" + page + ".jpg";
+//   } else {
+//     return imgname + "-00" + page + ".jpg";
+//   }
+// };
 
 //converting pdf pages to jpg image
 const convertImage = async (pdfPath, imgpath, page, numPages) => {
