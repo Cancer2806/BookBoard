@@ -1,12 +1,12 @@
-const router = require("express").Router();
-const sequelize = require("../config/connection");
-const withAuth = require("../utils/auth");
-const multer = require("multer");
-const { promises: fs } = require("fs");
-const pdfjsLib = require("pdfjs-dist/legacy/build/pdf.js");
-//const im = require("imagemagick");
-var path = require("path");
-const pdfConverter = require("pdf-poppler");
+const router = require('express').Router();
+const sequelize = require('../config/connection');
+const withAuth = require('../utils/auth');
+const multer = require('multer');
+const { promises: fs } = require('fs');
+const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.js');
+//const im = require('imagemagick');
+var path = require('path');
+const pdfConverter = require('pdf-poppler');
 const {
   Categories,
   Types,
@@ -14,11 +14,11 @@ const {
   Users,
   Reviews,
   Downloads,
-} = require("../models");
+} = require('../models');
 
-const path_temp = "public/uploads/temp/";
-const path_pdf = "public/uploads/doc/";
-const path_img = "public/uploads/img/";
+const path_temp = 'public/uploads/temp/';
+const path_pdf = 'public/uploads/doc/';
+const path_img = 'public/uploads/img/';
 
 
 var storage = multer.diskStorage({
@@ -35,11 +35,11 @@ var upload = multer({ storage: storage });
 //pdf poppler naming pattern
 var convertName = (imgname, noOfPages, page) => {
   if (noOfPages < 10) {
-    return imgname + "-" + page + ".jpg";
+    return imgname + '-' + page + '.jpg';
   } else if (noOfPages < 100) {
-    return imgname + "-0" + page + ".jpg";
+    return imgname + '-0' + page + '.jpg';
   } else {
-    return imgname + "-00" + page + ".jpg";
+    return imgname + '-00' + page + '.jpg';
   }
 };
 
@@ -48,7 +48,7 @@ const convertImage = async (pdfPath, imgpath, page, numPages) => {
   img_name = path.basename(pdfPath, path.extname(pdfPath));
 
   let option = {
-    format: "jpeg",
+    format: 'jpeg',
     out_dir: imgpath,
     out_prefix: path.basename(pdfPath, path.extname(pdfPath)),
     page: page,
@@ -58,10 +58,10 @@ const convertImage = async (pdfPath, imgpath, page, numPages) => {
     .convert(pdfPath, option)
     .then((res) => {
       
-      console.log("file converted");
+      console.log('file converted');
     })
     .catch((err) => {
-      console.log("an error has occurred in the pdf converter " + err);
+      console.log('an error has occurred in the pdf converter ' + err);
     });
 
   img_name = convertName(img_name, numPages, page);
@@ -71,9 +71,9 @@ const convertImage = async (pdfPath, imgpath, page, numPages) => {
 
 var resultHandler = function (err) {
   if (err) {
-    console.log("unlink failed", err);
+    console.log('unlink failed', err);
   } else {
-    console.log("file deleted");
+    console.log('file deleted');
   }
 };
 
@@ -93,11 +93,11 @@ const loadTempPdfImages = async (source_file) => {
       .getDocument(path.join(path_pdf, source_file))
       .promise.then(function (doc) {
         numPages = doc.numPages;
-        console.log("# Document Loaded");
-        console.log("Number of Pages: " + numPages);
+        console.log('# Document Loaded');
+        console.log('Number of Pages: ' + numPages);
       })
       .catch((err) => {
-        console.log("an error has occurred in the pdf converter " + err);
+        console.log('an error has occurred in the pdf converter ' + err);
       });
     for (let i = 1; i < 5; i++) {
       let file = await convertImage(
@@ -131,31 +131,31 @@ const getDocumentType = async () => {
 };
 
 //landing page route
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
 
     //Loading random collection
     const docs = await Files.findAll({
       limit: 8,
-      order: [[sequelize.literal("RAND()")]],
+      order: [[sequelize.literal('RAND()')]],
     });
 
       //loading latest 4 in recently added files
     const docs1 = await Files.findAll({
       limit: 4,
-      order: [["id", "DESC"]],
+      order: [['id', 'DESC']],
       include: [
         {
           model: Users,
-          attributes: ["first_name", "last_name"],
+          attributes: ['first_name', 'last_name'],
         },
         {
           model: Categories,
-          attributes: ["category_name"],
+          attributes: ['category_name'],
         },
         {
           model: Types,
-          attributes: ["type_name"],
+          attributes: ['type_name'],
         },
       ],
     });
@@ -163,33 +163,33 @@ router.get("/", async (req, res) => {
     //most downloadded once under popular
     const docs2 = await Downloads.findAll({
       limit: 4,
-      group: ["file_id"],
-      order: [[sequelize.col("CountedValue"), "DESC"]],
-      attributes: [[sequelize.fn("COUNT", "1"), "CountedValue"], "file_id"],
+      group: ['file_id'],
+      order: [[sequelize.col('CountedValue'), 'DESC']],
+      attributes: [[sequelize.fn('COUNT', '1'), 'CountedValue'], 'file_id'],
       include: [
         {
           model: Files,
           attributes: [
-            "id",
-            "title",
-            "brief_description",
-            "price",
-            "source_file",
-            "cover_art",
-            "user_id",
+            'id',
+            'title',
+            'brief_description',
+            'price',
+            'source_file',
+            'cover_art',
+            'user_id',
           ],
           include: [
             {
               model: Users,
-              attributes: ["first_name", "last_name"],
+              attributes: ['first_name', 'last_name'],
             },
             {
               model: Categories,
-              attributes: ["category_name"],
+              attributes: ['category_name'],
             },
             {
               model: Types,
-              attributes: ["type_name"],
+              attributes: ['type_name'],
             },
           ],
         },
@@ -201,7 +201,7 @@ router.get("/", async (req, res) => {
     const latestdoc = docs1.map((doc) => doc.get({ plain: true }));
     const popularDoc = docs2.map((doc) => doc.get({ plain: true }));
 
-    res.render("homepage", {
+    res.render('homepage', {
       randomDoc,
       popularDoc,
       latestdoc,
@@ -214,11 +214,11 @@ router.get("/", async (req, res) => {
 });
 
 //upload route call
-router.get("/upload", withAuth, async (req, res) => {
+router.get('/upload', withAuth, async (req, res) => {
   try {
     const doc_type = await getDocumentType();
     const category = await getDocumentCategory();
-    res.render("addFiles", {
+    res.render('addFiles', {
       category,
       doc_type,
       logged_in: req.session.logged_in,
@@ -230,9 +230,9 @@ router.get("/upload", withAuth, async (req, res) => {
 });
 
 //add review route
-router.get("/addreview/:id", async (req, res) => {
+router.get('/addreview/:id', async (req, res) => {
   try {
-    res.render("addReview", {
+    res.render('addReview', {
       id: req.params.id,
       logged_in: req.session.logged_in,
       user_id: req.session.user_id,
@@ -243,18 +243,18 @@ router.get("/addreview/:id", async (req, res) => {
 });
 
 //upload post method
-router.post("/upload", upload.single("source_file"), async (req, res, next) => {
+router.post('/upload', upload.single('source_file'), async (req, res, next) => {
   try {
     let numPages = 0;
     await pdfjsLib
       .getDocument(path.join(req.file.destination, req.file.filename))
       .promise.then(function (doc) {
         numPages = doc.numPages;
-        console.log("# Document Loaded");
-        console.log("Number of Pages: " + numPages);
+        console.log('# Document Loaded');
+        console.log('Number of Pages: ' + numPages);
       })
       .catch((err) => {
-        console.log("an error has occurred in the pdf converter " + err);
+        console.log('an error has occurred in the pdf converter ' + err);
       });
     var img_name = await convertImage(
       path.join(req.file.destination, req.file.filename),
@@ -275,16 +275,16 @@ router.post("/upload", upload.single("source_file"), async (req, res, next) => {
     });
     // console.log(req.file, req.body,req.file.filename,img_name)
     console.log(fileData);
-    res.redirect("/");
+    res.redirect('/');
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 //login page route
-router.get("/login", async (req, res) => {
+router.get('/login', async (req, res) => {
   try {
-    res.render("userLogin", {
+    res.render('userLogin', {
       logged_in: req.session.logged_in,
       user_id: req.session.user_id,
     });
@@ -294,16 +294,16 @@ router.get("/login", async (req, res) => {
 });
 
 //profile page load
-router.get("/profile/:id", withAuth, async (req, res) => {
+router.get('/profile/:id', withAuth, async (req, res) => {
   try {
     const userData = await Users.findByPk(req.params.id, {
-      attributes: { exclude: ["password"] },
+      attributes: { exclude: ['password'] },
       include: [{ all: true, nested: true }],
     });
 
     const user = userData.get({ plain: true });
 
-    res.render("profile", {
+    res.render('profile', {
       user,
       logged_in: req.session.logged_in,
       user_id: req.session.user_id,
@@ -315,9 +315,9 @@ router.get("/profile/:id", withAuth, async (req, res) => {
 });
 
 //register page load
-router.get("/register", async (req, res) => {
+router.get('/register', async (req, res) => {
   try {
-    res.render("signUp", {
+    res.render('signUp', {
       logged_in: req.session.logged_in,
       user_id: req.session.user_id,
     });
@@ -327,7 +327,7 @@ router.get("/register", async (req, res) => {
 });
 
 //search page route
-router.get("/search", async (req, res) => {
+router.get('/search', async (req, res) => {
   try {
     const doc_type = await getDocumentType();
     const category = await getDocumentCategory();
@@ -336,7 +336,7 @@ router.get("/search", async (req, res) => {
       include: [
         {
           model: Users,
-          attributes: ["first_name", "last_name"],
+          attributes: ['first_name', 'last_name'],
         },
       ],
     });
@@ -392,12 +392,12 @@ router.get("/search", async (req, res) => {
     } else {
       result4 = result3;
     }
-    if (req.query.free == "on") {
-      result5 = result4.filter((query) => query.price == "0.00");
+    if (req.query.free == 'on') {
+      result5 = result4.filter((query) => query.price == '0.00');
     } else {
       result5 = result4;
     }
-    if (req.query.descending == "on") {
+    if (req.query.descending == 'on') {
       result6 = result5.reverse();
     } else {
       result6 = result5;
@@ -407,7 +407,7 @@ router.get("/search", async (req, res) => {
 
    
 
-    res.render("search", {
+    res.render('search', {
       category,
       doc_type,
       search_query,
@@ -421,37 +421,37 @@ router.get("/search", async (req, res) => {
 });
 
 //load file route
-router.get("/file/:id", async (req, res) => {
+router.get('/file/:id', async (req, res) => {
   try {
     const data = await Files.findByPk(req.params.id, {
       include: [
         {
           model: Users,
-          attributes: ["first_name", "last_name"],
+          attributes: ['first_name', 'last_name'],
         },
         {
           model: Categories,
-          attributes: ["category_name"],
+          attributes: ['category_name'],
         },
         {
           model: Types,
-          attributes: ["type_name"],
+          attributes: ['type_name'],
         },
         {
           model: Reviews,
-          attributes: ["review_content", "rating"],
-          include: [{ model: Users, attributes: ["first_name", "last_name"] }],
+          attributes: ['review_content', 'rating'],
+          include: [{ model: Users, attributes: ['first_name', 'last_name'] }],
         },
         {
           model: Downloads,
-          attributes: ["price", "id"],
-          include: [{ model: Users, attributes: ["first_name", "last_name"] }],
+          attributes: ['price', 'id'],
+          include: [{ model: Users, attributes: ['first_name', 'last_name'] }],
         },
       ],
     });
     const fileobj = data.get({ plain: true });
     const preview_img = await loadTempPdfImages(fileobj.source_file);
-    res.render("file", {
+    res.render('file', {
       fileobj,
       preview_img,
       logged_in: req.session.logged_in,
@@ -461,11 +461,11 @@ router.get("/file/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-router.get("/logout", (req, res) => {
+router.get('/logout', (req, res) => {
   // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     req.session.destroy(() => {
-      res.redirect("/");
+      res.redirect('/');
     });
   }
 });
