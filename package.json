@@ -24,8 +24,5 @@
     "pdf-poppler": "^0.2.1",
     "pdfjs-dist": "^2.14.305",
     "sequelize": "^6.19.2"
-  },
-  "devDependencies": {
-    "@faker-js/faker": "^6.3.1"
   }
 }
