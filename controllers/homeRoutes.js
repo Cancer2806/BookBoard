@@ -16,10 +16,13 @@ const {
   Downloads,
 } = require('../models');
 
-const path_temp = 'public/uploads/temp/';
-const path_pdf = 'public/uploads/doc/';
-const path_img = 'public/uploads/img/';
+// const path_temp = 'public/uploads/temp/';
+// const path_pdf = 'public/uploads/doc/';
+// const path_img = 'public/uploads/img/';
 
+const path_temp = '/uploads/temp/';
+const path_pdf = '/uploads/doc/';
+const path_img = '/uploads/img/';
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
