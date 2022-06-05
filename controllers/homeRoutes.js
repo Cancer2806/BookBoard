@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const withAuth = require('../utils/auth');
-const multer = require('multer');
+// const multer = require('multer');
 const { promises: fs } = require('fs');
 const pdfjsLib = require('pdfjs-dist/legacy/build/pdf.js');
 //const im = require('imagemagick');
@@ -20,20 +20,20 @@ const {
 // const path_pdf = 'public/uploads/doc/';
 // const path_img = 'public/uploads/img/';
 
-const path_temp = '/uploads/temp/';
-const path_pdf = '/uploads/doc/';
-const path_img = '/uploads/img/';
+// const path_temp = '/uploads/temp/';
+// const path_pdf = '/uploads/doc/';
+// const path_img = '/uploads/img/';
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path_pdf);
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
-  },
-});
+// var storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, path_pdf);
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + path.extname(file.originalname)); //Appending extension
+//   },
+// });
 
-var upload = multer({ storage: storage });
+// var upload = multer({ storage: storage });
 
 //pdf poppler naming pattern
 var convertName = (imgname, noOfPages, page) => {
@@ -246,43 +246,43 @@ router.get('/addreview/:id', async (req, res) => {
 });
 
 //upload post method
-router.post('/upload', upload.single('source_file'), async (req, res, next) => {
-  try {
-    let numPages = 0;
-    await pdfjsLib
-      .getDocument(path.join(req.file.destination, req.file.filename))
-      .promise.then(function (doc) {
-        numPages = doc.numPages;
-        console.log('# Document Loaded');
-        console.log('Number of Pages: ' + numPages);
-      })
-      .catch((err) => {
-        console.log('an error has occurred in the pdf converter ' + err);
-      });
-    var img_name = await convertImage(
-      path.join(req.file.destination, req.file.filename),
-      path_img,
-      1,
-      numPages
-    );
+// router.post('/upload', upload.single('source_file'), async (req, res, next) => {
+//   try {
+//     let numPages = 0;
+//     await pdfjsLib
+//       .getDocument(path.join(req.file.destination, req.file.filename))
+//       .promise.then(function (doc) {
+//         numPages = doc.numPages;
+//         console.log('# Document Loaded');
+//         console.log('Number of Pages: ' + numPages);
+//       })
+//       .catch((err) => {
+//         console.log('an error has occurred in the pdf converter ' + err);
+//       });
+//     var img_name = await convertImage(
+//       path.join(req.file.destination, req.file.filename),
+//       path_img,
+//       1,
+//       numPages
+//     );
 
-    const fileData = await Files.create({
-      title: req.body.title,
-      brief_description: req.body.brief_description,
-      user_id: req.session.user_id,
-      price: req.body.price,
-      cover_art: img_name,
-      type_id: req.body.type_id,
-      category_id: req.body.category_id,
-      source_file: req.file.filename,
-    });
-    // console.log(req.file, req.body,req.file.filename,img_name)
-    console.log(fileData);
-    res.redirect('/');
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+//     const fileData = await Files.create({
+//       title: req.body.title,
+//       brief_description: req.body.brief_description,
+//       user_id: req.session.user_id,
+//       price: req.body.price,
+//       cover_art: img_name,
+//       type_id: req.body.type_id,
+//       category_id: req.body.category_id,
+//       source_file: req.file.filename,
+//     });
+//     // console.log(req.file, req.body,req.file.filename,img_name)
+//     console.log(fileData);
+//     res.redirect('/');
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 //login page route
 router.get('/login', async (req, res) => {
