@@ -24,14 +24,18 @@ module.exports = {
     },
     get_rating_average: (file) => {
       let ratingTotal = 0;
-      let ratingLength = 0
+      let ratingLength = 1
       if (file.length == 0) {
         return 0;
       }
       for (let i = 0; i < file.length; i++) {
         for (let r = 0; r < file[i].reviews.length; r++ ) {
-          let rating = file[i].reviews[r].rating;
-          ratingTotal = ratingTotal + rating;
+          if(file[i].reviews[r].rating)
+          {
+            let rating = file[i].reviews[r].rating;
+            ratingTotal = ratingTotal + rating;
+          }
+          
           ratingLength++;
         }
       }
