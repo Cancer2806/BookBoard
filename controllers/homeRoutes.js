@@ -6,7 +6,6 @@ const { promises: fs } = require("fs");
 const pdfjsLib = require("pdfjs-dist/legacy/build/pdf.js");
 //const im = require("imagemagick");
 var path = require("path");
-const pdfConverter = require("pdf-poppler");
 const {
   Categories,
   Types,
@@ -54,15 +53,15 @@ const convertImage = async (pdfPath, imgpath, page, numPages) => {
     page: page,
   };
 
-  await pdfConverter
-    .convert(pdfPath, option)
-    .then((res) => {
+  // await pdfConverter
+  //   .convert(pdfPath, option)
+  //   .then((res) => {
       
-      console.log("file converted");
-    })
-    .catch((err) => {
-      console.log("an error has occurred in the pdf converter " + err);
-    });
+  //     console.log("file converted");
+  //   })
+  //   .catch((err) => {
+  //     console.log("an error has occurred in the pdf converter " + err);
+  //   });
 
   img_name = convertName(img_name, numPages, page);
 
