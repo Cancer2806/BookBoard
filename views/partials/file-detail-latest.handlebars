@@ -5,10 +5,10 @@
       <p class="italic">${{price}}</p>
     </div>
     <div class="header-cover">
-      <img src="uploads/img/{{cover_art}}" alt="image" class="cover-thumb" />
+      <div  class="cover-thumb" id="cover_img"></div>
     </div>
   </div>
-
+  <input type="hidden" id="hiddurl" value="uploads/doc/{{source_file}}">
   <div class="content-body">
     <div class="content-nav">
       <p class="content-item"><a href="/profile/{{user_id}}" class="content-link">{{user.first_name}}

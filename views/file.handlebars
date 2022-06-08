@@ -30,11 +30,7 @@
   <div class="img-wrapper">
   <div class="search-col-img file-img">
     <div class="search-cover file-cover">
-      <img
-        src="/uploads/img/{{fileobj.cover_art}}"
-        alt="image"
-        class="file-thumb"
-      />
+    <div id="img_main"></div>
     </div>
   </div>
   </div>
@@ -69,14 +65,13 @@
                 </div>  {{/if}}
               </div>
               <div class="file-preview">
-                {{#each preview_img as |img|}}
-                <div class="preview-img">
-                  <img src="/uploads/temp/{{{img}}}" alt="preview image">
+                <div class="preview-img" id="preview-img">
+                 
                 </div>
-                {{/each}}
+               
               </div>
               <div class="file-review">
-
+<input type="hidden" id="hiddurl" value="/uploads/doc/{{fileobj.source_file}}">
               <table class="review-tbl">
                 <tr><th>User</th><th>Comment
               {{#if logged_in}}<div class="right-section">
@@ -107,4 +102,6 @@
     </table>
   </aside>
 </div>
+<script src="../js/pdfConverter.js"></script>
 <script src="../js/files.js"></script>
+

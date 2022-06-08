@@ -36,7 +36,7 @@
               </div>
             </div>
             <div class="content-desc">
-              <div class="content-row">
+              <div class="content-row" id="uploadbooks">
                 {{#each user.files as |file|}}
                   {{> image-row}}
                 {{/each}}
@@ -50,7 +50,7 @@
               </div>
             </div>
             <div class="content-desc">
-              <div class="content-row">
+              <div class="content-row" id="favbooks">
                 {{#each user.favourites as |favourite|}}
                   {{> upload-row}}
                 {{/each}}
@@ -59,3 +59,4 @@
         </div>    
 
     </section>
+ <script src="/js/profile.js"></script>
