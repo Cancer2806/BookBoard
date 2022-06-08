@@ -77,42 +77,6 @@ var resultHandler = function (err) {
 };
 
 //preview image loading
-const loadTempPdfImages = async (source_file) => {
-  var img_list = [];
-  try {
-    const files = await fs.readdir(path_temp);
-    if (files) {
-      const unlinkPromises = await files.map((filename) =>
-        fs.unlink(`${path_temp}/${filename}`, resultHandler)
-      );
-      await Promise.all(unlinkPromises);
-    }
-    let numPages = 0;
-    await pdfjsLib
-      .getDocument(path.join(path_pdf, source_file))
-      .promise.then(function (doc) {
-        numPages = doc.numPages;
-        console.log("# Document Loaded");
-        console.log("Number of Pages: " + numPages);
-      })
-      .catch((err) => {
-        console.log("an error has occurred in the pdf converter " + err);
-      });
-    for (let i = 1; i < 5; i++) {
-      let file = await convertImage(
-        path.join(path_pdf, source_file),
-        path_temp,
-        i,
-        numPages
-      );
-
-      img_list.push(file);
-    }
-  } catch (err) {
-    console.log(err);
-  }
-  return img_list;
-};
 
 //get document category method
 const getDocumentCategory = async () => {
@@ -449,7 +413,7 @@ router.get("/file/:id", async (req, res) => {
       ],
     });
     const fileobj = data.get({ plain: true });
-    const preview_img = await loadTempPdfImages(fileobj.source_file);
+    const preview_img = [];
     res.render("file", {
       fileobj,
       preview_img,
