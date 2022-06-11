@@ -30,7 +30,7 @@ A fabulous place for sharing (and selling) original content.  The responsive app
 
   The application is intuitive for users.  Simply register and then log-in.  Once logged in, a User can upload works they have created or interact with items uploaded by other users.   
 
-  The application is deployed at:  https://p2bookboard.herokuapp.com/  although there are issues with the deployment at this point in time.
+  The application is deployed at:  https://bookboardsite.herokuapp.com/  although there are issues with the deployment at this point in time.
  
   <br>
 
