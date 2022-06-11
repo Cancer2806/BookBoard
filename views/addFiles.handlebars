@@ -1,92 +1,42 @@
-{{!-- <form action="/upload" method="post" enctype="multipart/form-data">
-  <div class="form-style">
-    <div class="header-tab">Add Document</div>
-    <div class="row"><label>Title</label><input
-        id="title"
-        name="title"
-        class="form-input"
-      /></div>
-    <div class="row"><label>Description</label><input
-        id="brief_description"
-        name="brief_description"
-        class="form-input"
-      /></div>
-    <div class="row"><label>Price</label><input
-        id="price"
-        name="price"
-        class="form-input"
-      /></div>
-    <div class="row"><label>Document Type</label><select
-        class="form-input"
-        name="type_id"
-        id="type_id"
-      >
-        {{#each doc_type as |doc|}}
-          <option value="{{doc.id}}">{{doc.type_name}}</option>
-        {{/each}}
-      </select></div>
-    <div class="row"><label>Document Category</label><select
-        class="form-input"
-        name="category_id"
-        id="category_id"
-      >
-        {{#each category as |cat|}}
-          <option value="{{cat.id}}">{{cat.category_name}}</option>
-        {{/each}}
-      </select></div>
-    <div class="row"><label>File</label><input
-        class="form-input"
-        type="file"
-        id="source_file"
-        name="source_file"
-      /></div>
-    <div class="row"><button
-        type="submit"
-        class="btn-submit"
-      >Submit</button></div>
-  </div>
-</form> --}}
-
 <div class="login-wrapper">
   <div class="form-wrapper login-box">
-      <div class="content-header flex h-zero">
-          <div class="header-title">
-                <h3>Upload</h3>
-          </div>
+    <div class="content-header flex h-zero">
+      <div class="header-title">
+        <h3>Upload</h3>
       </div>
-      <div class="content-body h-zero">
+    </div>
+    <div class="content-body h-zero">
       <form action="/upload" method="post" enctype="multipart/form-data" class="filters-form">
-          <label class="form-label" for="title">Title:</label>
-          <input type="text" name="title" class="title-input">
-          <br>
-          <label class="form-label" for="brief_description">Description:</label>
-          <textarea type="text" name="brief_description" class="bio-input"></textarea>
-          <br>
-          <label class="form-label" for="category_id">Genre:</label>
-          <br>
-          <select class="single-select" name="category_id" class="cat-in" >
-            {{#each category}}
-              <option value="{{this.id}}">{{this.category_name}}</option>
-            {{/each}}
-          </select>
-          <br>
-          <label class="form-label" for="type_id">Category:</label>
-          <br>
-          <select class="single-select" name="type_id" class="type-in" >
-            {{#each doc_type}}
-              <option value="{{this.id}}">{{this.type_name}}</option>
-            {{/each}}
-          </select>
-          <br>
-          <label class="form-label" for="price">Price ($):</label>
-          <input type="number" min="0.00" max="10000.00" step="0.01" name="price" class="price-input">
-          <br> 
-          <label class="form-label" for="password">PDF:</label>
-          <input type="file" name="source_file" class="password-input">
-          <br> 
-          <button type="submit" value="Register" class="login-btn">Upload</button>
+        <label class="form-label" for="title">Title:</label>
+        <input type="text" name="title" class="title-input">
+        <br>
+        <label class="form-label" for="brief_description">Description:</label>
+        <textarea type="text" name="brief_description" class="bio-input"></textarea>
+        <br>
+        <label class="form-label" for="category_id">Genre:</label>
+        <br>
+        <select class="single-select" name="category_id" class="cat-in" >
+          {{#each category}}
+            <option value="{{this.id}}">{{this.category_name}}</option>
+          {{/each}}
+        </select>
+        <br>
+        <label class="form-label" for="type_id">Category:</label>
+        <br>
+        <select class="single-select" name="type_id" class="type-in" >
+          {{#each doc_type}}
+            <option value="{{this.id}}">{{this.type_name}}</option>
+          {{/each}}
+        </select>
+        <br>
+        <label class="form-label" for="price">Price ($):</label>
+        <input type="number" min="0.00" max="10000.00" step="0.01" name="price" class="price-input">
+        <br> 
+        <label class="form-label" for="password">PDF:</label>
+        <input type="file" name="source_file" class="password-input">
+        <br> 
+        <button type="submit" value="Register" class="login-btn">Upload</button>
       </form>
     </div>
   </div>
-
-  </div>
+</div>

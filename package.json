@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "seed": "node seeds/seed.js",
     "watch": "nodemon server.js"
@@ -23,8 +22,5 @@
     "mysql2": "^2.3.3",
     "pdfjs-dist": "^2.14.305",
     "sequelize": "^6.19.2"
-  },
-  "devDependencies": {
-    "@faker-js/faker": "^6.3.1"
   }
 }
